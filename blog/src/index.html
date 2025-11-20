@@ -1,6 +1,6 @@
 ---
 layout: layouts/home
-title: "Blogs"
+title: "Blog"
 ---
 
 <div class="post-window" id="post-window">
@@ -14,7 +14,10 @@ title: "Blogs"
     <ul>
       {% for post in collections.posts %}
       <li>
-        <img src="assets/images/icon_cho.png" alt="Author icon" />
+        <img
+          src="{{ '/assets/images/icon_cho.png' | url }}"
+          alt="Author icon"
+        />
         <p>
           {{ post.data.author }}
           <a
@@ -26,8 +29,11 @@ title: "Blogs"
         <p class="post-description">{{post.data.description}}</p>
         <p class="post-date">{{post.data.date}}</p>
         <p class="interactions">
-          <img src="assets/images/icon_star.png" alt="Star" />
-          <img src="assets/images/icon_retweet.png" alt="Retweet" />
+          <img src="{{ '/assets/images/icon_star.png' | url }}" alt="Star" />
+          <img
+            src="{{ '/assets/images/icon_retweet.png' | url }}"
+            alt="Retweet"
+          />
         </p>
       </li>
 
@@ -39,7 +45,7 @@ title: "Blogs"
 <div class="ame-window" id="ame-window">
   <img
     class="ame"
-    src="assets/images/ame/neutral.png"
+    src="{{ '/assets/images/ame/neutral.png' | url }}"
     onclick="setAmeExpressionTemp('smiling');"
   />
 </div>
@@ -147,19 +153,19 @@ title: "Blogs"
     if (!ame) return;
     if (!img) return;
     if (img.id == "ame-temp-expression") return;
-    img.src = `assets/images/ame/${expression}.png`;
+    img.src = `{{ '/assets/images/ame/' | url }}${expression}.png`;
     img.id = "ame-temp-expression";
     setTimeout(() => {
-      img.src = `assets/images/ame/neutral.png`;
+      img.src = `{{ '/assets/images/ame/neutral.png' | url }}`;
       img.removeAttribute("id");
     }, length);
   }
 
   function blink() {
     if (img.id == "ame-temp-expression") return;
-    img.src = "assets/images/ame/blink.png";
+    img.src = "{{ '/assets/images/ame/blink.png' | url }}";
     setTimeout(() => {
-      img.src = "assets/images/ame/neutral.png";
+      img.src = "{{ '/assets/images/ame/neutral.png' | url }}";
     }, 150);
   }
 
