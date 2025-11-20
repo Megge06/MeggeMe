@@ -1,6 +1,9 @@
 @import url(reset.css);
 
-.profile-picture {
-  width: 300px;
-  height: 300px;
+body {
+  text-align: center;
+}
+
+.minecraft-logo {
+  width: 50rem;
 }
