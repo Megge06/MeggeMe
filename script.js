@@ -3,15 +3,21 @@ function updateVideoSources() {
   const loopVideo = document.querySelector(".bg-loop");
   const isVertical = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
 
+  const splashSources = splashVideo.querySelectorAll("source");
+  const loopSources = loopVideo.querySelectorAll("source");
+
+  if (splashSources.length < 2 || loopSources.length < 2) return;
+
   if (isVertical) {
-    splashVideo.querySelector("source").src =
-      "assets/home/persona_3_splash_vertical.mp4";
-    loopVideo.querySelector("source").src =
-      "assets/home/persona_3_loop_vertical.mp4";
+    splashSources[0].src = "assets/home/persona_3_splash_vertical.mp4";
+    splashSources[1].src = "assets/home/persona_3_splash_vertical_h264.mp4";
+    loopSources[0].src = "assets/home/persona_3_loop_vertical.mp4";
+    loopSources[1].src = "assets/home/persona_3_loop_vertical_h264.mp4";
   } else {
-    splashVideo.querySelector("source").src =
-      "assets/home/persona_3_splash.mp4";
-    loopVideo.querySelector("source").src = "assets/home/persona_3_loop.mp4";
+    splashSources[0].src = "assets/home/persona_3_splash.mp4";
+    splashSources[1].src = "assets/home/persona_3_splash_h264.mp4";
+    loopSources[0].src = "assets/home/persona_3_loop.mp4";
+    loopSources[1].src = "assets/home/persona_3_loop_h264.mp4";
   }
 
   splashVideo.load();
@@ -22,14 +28,18 @@ window.addEventListener("DOMContentLoaded", () => {
   updateVideoSources();
 
   const splashVideo = document.querySelector(".bg-splash");
+  const loopVideo = document.querySelector(".bg-loop");
+
+  if (loopVideo) {
+    loopVideo.preload = "auto";
+  }
 
   splashVideo.addEventListener("ended", () => {
     document.body.classList.add("splash-done");
+    if (loopVideo && loopVideo.paused) {
+      loopVideo.play().catch(() => {});
+    }
   });
-
-  setTimeout(() => {
-    document.body.classList.add("splash-done");
-  }, 3100);
 });
 
 window.addEventListener("resize", () => {

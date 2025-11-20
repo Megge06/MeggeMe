@@ -35,12 +35,6 @@ body {
   padding: 1.25rem;
   gap: 1rem;
   transition: background-color 200ms ease, color 200ms ease;
-
-  background-image: url("../assets/about_me/background.gif");
-  background-size: cover; /* Makes image cover entire viewport */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll; /* Keeps background fixed when scrolling */
 }
 
 .character {
@@ -52,9 +46,6 @@ body {
 
 a {
   color: var(--accent);
-}
-
-@media (prefers-reduced-motion: reduce) {
 }
 
 .dialogue-box {
@@ -73,16 +64,6 @@ a {
   z-index: 1;
   position: sticky;
   object-fit: contain;
-}
-
-@media (orientation: portrait) {
-  .dialogue-box img.dialogue {
-    content: url("../assets/about_me/dialogue_box_vertical.png");
-  }
-  .character {
-    width: 30rem;
-    height: 30rem;
-  }
 }
 
 .dialogue-text {
@@ -120,4 +101,31 @@ a {
 .dialogue-text::-webkit-scrollbar-thumb {
   background-color: var(--accent);
   border-radius: 2px;
+}
+
+.bg-video {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.bg-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: none;
+  pointer-events: none;
+}
+
+@media (orientation: portrait) {
+  .dialogue-box img.dialogue {
+    content: url("../assets/about_me/dialogue_box_vertical.png");
+  }
+  .character {
+    width: 30rem;
+    height: 30rem;
+  }
 }

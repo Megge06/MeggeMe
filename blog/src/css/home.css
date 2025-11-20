@@ -46,6 +46,10 @@ p img {
   width: 50%;
   height: auto;
   z-index: 10;
+
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .ame-window {
@@ -60,6 +64,10 @@ p img {
 
   overflow: hidden;
   z-index: 5;
+
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .ame {
@@ -130,7 +138,6 @@ p img {
 
 .post-header {
   display: flex;
-  align-items: left;
   gap: 1rem;
   font-size: 1.5rem;
   margin-bottom: 2rem;
@@ -167,39 +174,36 @@ h2 {
   .desktop {
     display: none;
   }
-
   .post-window {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 80%;
-    height: auto;
-    min-height: 100vh;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    height: 90dvh;
+    padding: 2rem;
     cursor: auto;
     background: url("../assets/images/window_vertical.png") no-repeat center /
       contain;
     display: flex;
     flex-direction: column;
-
-    left: 50%;
-    transform: translate(-50%);
+    overflow: hidden;
   }
-
   .post-window h1 {
-    margin-top: 10vh;
+    margin-top: 14vh;
     font-size: 2rem;
+    flex-shrink: 0;
   }
-
+  .post-window p {
+    flex-shrink: 0;
+  }
   .post-window .post-list {
-    position: absolute;
+    position: relative;
     width: 100%;
-    height: auto;
-    max-height: 40vh;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 30vh;
+    margin-bottom: 8rem;
   }
-
   .post-window .post-list li {
     padding: 1rem 1.25rem;
   }
@@ -208,10 +212,6 @@ h2 {
     max-height: 400px;
     padding: 0.5rem;
   }
-  .post-window {
-    padding-top: 25vh;
-  }
-
   .ame-window {
     display: none;
   }

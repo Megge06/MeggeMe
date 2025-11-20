@@ -1,16 +1,12 @@
 ---
 layout: layouts/post
 title: "The Chainsaw Man movie was really good"
-description: "I recently went to see the Chainsaw Man Movie in Theaters with some friends and it was the best cinema experience I've had in a long time."
+description: "I recently went to see the Chainsaw Man movie in theaters with some friends and it was the best cinema experience I've had in a long time."
 date: "2025-11-13"
 author: "Megge"
 categories:
   - anime
   - media
-tags:
-  - review
-  - chainsaw-man
-  - movie
 ---
 
 ## Context
@@ -29,7 +25,7 @@ Reze's character and story both fit well together so that I think Fujimoto's goa
 
 I took a picture during the movie (don't tell anyone) of one of the most important scenes in the movie, which I will just put here:
 
-<div><img src="assets/blog_images/chainsawman.webp" alt="Chainsawman Image" class="blog-image" loading="lazy"></div>
+<div><img src="assets/blog_images/chainsaw_man.webp" alt="Chainsawman Image" class="blog-image" loading="lazy"></div>
 
 ## Animation and Art Style
 

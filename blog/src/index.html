@@ -56,38 +56,47 @@ title: "Blogs"
 
     let dragging = false;
     let startX = 0,
-      startY = 0,
-      origLeft = 0,
-      origTop = 0;
+      startY = 0;
+    let currentX = 0,
+      currentY = 0; // Track cumulative translation
 
-    function px(v) {
-      return v + "px";
-    }
     function beginDrag(clientX, clientY) {
-      const r = el.getBoundingClientRect();
       startX = clientX;
       startY = clientY;
-      origLeft = r.left;
-      origTop = r.top;
       dragging = true;
     }
+
     function moveDrag(clientX, clientY) {
       if (!dragging) return;
       const dx = clientX - startX;
       const dy = clientY - startY;
-      el.style.left = px(origLeft + dx);
-      el.style.top = px(origTop + dy);
+
+      // Apply translation relative to the last position
+      const newX = currentX + dx;
+      const newY = currentY + dy;
+      el.style.transform = `translate(${newX}px, ${newY}px)`;
     }
-    function endDrag() {
+
+    function endDrag(clientX, clientY) {
+      if (!dragging) return;
+
+      // Update cumulative position when drag ends
+      const dx = clientX - startX;
+      const dy = clientY - startY;
+      currentX += dx;
+      currentY += dy;
+
       dragging = false;
     }
+
     el.addEventListener("mousedown", (e) => {
       if (e.target !== el) return;
       beginDrag(e.clientX, e.clientY);
       e.preventDefault();
     });
+
     window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
-    window.addEventListener("mouseup", endDrag);
+    window.addEventListener("mouseup", (e) => endDrag(e.clientX, e.clientY));
 
     el.addEventListener(
       "touchstart",
@@ -108,7 +117,10 @@ title: "Blogs"
       { passive: true }
     );
 
-    window.addEventListener("touchend", endDrag);
+    window.addEventListener("touchend", (e) => {
+      const t = e.changedTouches[0];
+      endDrag(t.clientX, t.clientY);
+    });
   }
 
   enableDragging(win);
@@ -122,6 +134,8 @@ title: "Blogs"
       const text = await postContent.text();
       win.innerHTML = text;
     } catch (err) {
+      win.innerHTML =
+        '<p>The blog post could not be loaded. <a onClick="loadList();">Return to Post List.</a></p>';
       console.error("Failed to load post:", err);
     }
   }
