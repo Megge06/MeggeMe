@@ -7,19 +7,19 @@
     <div class="sidebar">
       <img
         id="sidebarLeft"
-        src="{{ 'assets/images/sidebar_day.png' | url }}"
+        src="{{ '/assets/images/sidebar_day.png' | url }}"
         alt="Sidebar left"
         class="left"
       />
       <img
         id="sidebarRight"
-        src="{{ 'assets/images/sidebar_day.png' | url }}"
+        src="{{ '/assets/images/sidebar_day.png' | url }}"
         alt="Sidebar right"
         class="right"
       />
     </div>
     <div class="desktop">
-      <img src="{{ 'assets/images/desktop.png' | url }}" />
+      <img src="{{ '/assets/images/desktop.png' | url }}" />
     </div>
     {{ content | safe }}
     <script>
@@ -27,14 +27,14 @@
       const left = document.getElementById("sidebarLeft");
       const right = document.getElementById("sidebarRight");
       if (time > 10 && time < 18) {
-        left.src = "{{ 'assets/images/sidebar_day.png' | url }}";
-        right.src = "{{ 'assets/images/sidebar_day.png' | url }}";
+        left.src = "{{ '/assets/images/sidebar_day.png' | url }}";
+        right.src = "{{ '/assets/images/sidebar_day.png' | url }}";
       } else if (time > 20 || time < 8) {
-        left.src = "{{ 'assets/images/sidebar_night.png' | url }}";
-        right.src = "{{ 'assets/images/sidebar_night.png' | url }}";
+        left.src = "{{ '/assets/images/sidebar_night.png' | url }}";
+        right.src = "{{ '/assets/images/sidebar_night.png' | url }}";
       } else {
-        left.src = "{{ 'assets/images/sidebar_dusk.png' | url }}";
-        right.src = "{{ 'assets/images/sidebar_dusk.png' | url }}";
+        left.src = "{{ '/assets/images/sidebar_dusk.png' | url }}";
+        right.src = "{{ '/assets/images/sidebar_dusk.png' | url }}";
       }
     </script>
   </body>
