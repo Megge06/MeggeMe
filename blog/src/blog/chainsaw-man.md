@@ -50,3 +50,5 @@ The opening and ending themes were also really good. "IRIS OUT" continued the sa
 ## Conclusion
 
 So, the movie was so good that I went to see it twice, with subtitles the second time. I can wholeheartedly recommend this movie to literally everyone. If I got the chance, I would gladly watch it again a third, fourth, or fifth time. I don't want to miss the opportunity to see this movie in theaters again before it leaves the cinemas.
+
+Update: I'm going to watch it a third time this weekend with some friends.
