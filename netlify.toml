@@ -11,3 +11,13 @@
   from = "/blog/*"
   to = "/blog/_site/:splat"
   status = 200
+
+[[redirects]]
+  from = "/photos"
+  to = "/photos/_site/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/photos/*"
+  to = "/photos/_site/:splat"
+  status = 200
