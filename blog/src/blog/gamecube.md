@@ -21,4 +21,6 @@ I bought the GameCube from Kleinanzeigen (the German equivalent of Craigslist). 
 
 I first had to troubleshoot the console, because of connection issues to my tv via hdmi. I learned that component to hdmi adapters require a power source, which I didn't know before. After getting that sorted, I was able to play some games. The controller was quite nice I must say, the shoulder buttons especially are very satisfying to use. The button layout makes a lot of sense, I don't know why there aren't more controllers like that.
 
+<div><img src="{{ '/assets/blog_images/gamecube.webp' | url }}" alt="Chainsawman Image" class="blog-image" loading="lazy"></div>
+
 So far I only played Mario Kart: Double Dash!! because I didn't want to start playing any more story games before finishing my current backlog. I do howver still want to play the games I bought and the GameCube classics like The Legend of Zelda: The Wind Waker, Luigi's Mansion and Chibi-Robo!.
