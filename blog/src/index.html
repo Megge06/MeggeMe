@@ -64,7 +64,7 @@ title: "Blog"
     let startX = 0,
       startY = 0;
     let currentX = 0,
-      currentY = 0; // Track cumulative translation
+      currentY = 0;
 
     function beginDrag(clientX, clientY) {
       startX = clientX;
@@ -77,7 +77,6 @@ title: "Blog"
       const dx = clientX - startX;
       const dy = clientY - startY;
 
-      // Apply translation relative to the last position
       const newX = currentX + dx;
       const newY = currentY + dy;
       el.style.transform = `translate(${newX}px, ${newY}px)`;
@@ -86,7 +85,6 @@ title: "Blog"
     function endDrag(clientX, clientY) {
       if (!dragging) return;
 
-      // Update cumulative position when drag ends
       const dx = clientX - startX;
       const dy = clientY - startY;
       currentX += dx;

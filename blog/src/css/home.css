@@ -1,9 +1,9 @@
 :root {
-  --cursor-auto: url("/assets/cursor/nso_point.cur"), auto;
-  --cursor-pointer: url("/assets/cursor/nso_point.cur"), pointer;
-  --cursor-move: url("/assets/cursor/nso_move.cur"), move;
-  --cursor-text: url("/assets/cursor/nso_textselector.cur"), text;
-  --cursor-grab: url("/assets/cursor/nso_grab.cur"), grabbing;
+  --cursor-auto: url("/blog/assets/cursor/nso_point.cur"), auto;
+  --cursor-pointer: url("/blog/assets/cursor/nso_point.cur"), pointer;
+  --cursor-move: url("/blog/assets/cursor/nso_move.cur"), move;
+  --cursor-text: url("/blog/assets/cursor/nso_textselector.cur"), text;
+  --cursor-grab: url("/blog/assets/cursor/nso_grab.cur"), grabbing;
 }
 
 .post-list {
@@ -37,7 +37,7 @@ p img {
 }
 
 .post-window {
-  background: url("/assets/images/window.png") no-repeat center / 100% 100%;
+  background: url("/blog/assets/images/window.png") no-repeat center / 100% 100%;
   position: absolute;
   padding: 3rem;
   cursor: var(--cursor-move);
@@ -53,7 +53,7 @@ p img {
 }
 
 .ame-window {
-  background: url("/assets/images/room.png") no-repeat center / 100% 100%;
+  background: url("/blog/assets/images/room.png") no-repeat center / 100% 100%;
   position: fixed;
   cursor: var(--cursor-move);
 
@@ -183,7 +183,7 @@ h2 {
     height: 90dvh;
     padding: 2rem;
     cursor: auto;
-    background: url("/assets/images/window_vertical.png") no-repeat center /
+    background: url("/blog/assets/images/window_vertical.png") no-repeat center /
       contain;
     display: flex;
     flex-direction: column;

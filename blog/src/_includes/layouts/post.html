@@ -1,8 +1,9 @@
 <div class="post-header">
-  <img src="assets/images/icon_cho.png" alt="profile-picture" />
+  <img src="{{ 'assets/images/icon_cho.png' | url }}" alt="profile-picture" />
   {{ author }} {{ title }}
 </div>
 <div class="post-content">{{ content | safe }}</div>
 <a href="#" onclick="loadList();">
-  <img class="back-button" src="assets/images/previous.png" /> Post List</a
+  <img class="back-button" src="{{ 'assets/images/previous.png' | url }}" />
+  Post List</a
 >
