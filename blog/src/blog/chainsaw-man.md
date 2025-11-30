@@ -25,7 +25,7 @@ Reze's character and story both fit well together so that I think Fujimoto's goa
 
 I took a picture during the movie (don't tell anyone) of one of the most important scenes in the movie, which I will just put here:
 
-<div><img src="assets/blog_images/chainsaw_man.webp" alt="Chainsawman Image" class="blog-image" loading="lazy"></div>
+<div><img src="{{ '/assets/blog_images/chainsaw_man.webp' | url }}" alt="Chainsawman Image" class="blog-image" loading="lazy"></div>
 
 ## Animation and Art Style
 
@@ -52,3 +52,5 @@ The opening and ending themes were also really good. "IRIS OUT" continued the sa
 So, the movie was so good that I went to see it twice, with subtitles the second time. I can wholeheartedly recommend this movie to literally everyone. If I got the chance, I would gladly watch it again a third, fourth, or fifth time. I don't want to miss the opportunity to see this movie in theaters again before it leaves the cinemas.
 
 Update: I'm going to watch it a third time this weekend with some friends.
+
+Update Update: Third time was still really good.
