@@ -1,15 +1,7 @@
-const text = [
+let text = [
   `Cloud lint marble static fork neon drift. [normal]`,
-  `Bubble prism waffle comet jitter sprout. [happy]`,
-  `Rust echo hollow cardboard drizzle fragment. [sad]`,
-  `Quartz parse swivel blueprint delta noodle. [thinking]`,
-  `Velvet glitch tungsten ember kale phantom. [horror]`,
-  `Axis wobble checksum moth lantern splice. [dissatisfied]`,
-  `Cipher haze lattice orbit ginger polaroid. [smug]`,
-  `Canvas blur semaphore whisper basil satellite. [mentallyabsent]`,
-  `Titanium kernel lucid palindrome vector paprika. [selfassured]`,
-  `Static radar velvet thistle corkscrew midnight. [paranoid]`,
-  `Granite lullaby buffer oat spiral koi. [tired]`,
+  `Quantum echo velvet prism solar pulse. [happy]`,
+  `Nebula cascade twilight ember flux. [thinking]`,
 ];
 const emotionMap = {
   "[dissatisfied]": "dissatisfied.webp",
@@ -27,6 +19,7 @@ const emotionMap = {
 
 const dialogueText = document.querySelector(".dialogue-text");
 const dialogueBox = document.querySelector(".dialogue-box");
+const characterImg = document.querySelector(".character");
 
 let index = 0;
 let isTyping = false;
@@ -42,15 +35,12 @@ dialogueBox.addEventListener("click", function () {
     index++;
     typewriterEffect(text[index]);
   } else {
-    typewriterEffect("...");
+    options();
   }
 });
 
 function changeImage(text) {
   //Function for changing the character image based on the dialogue
-
-  const characterImg = document.querySelector(".character");
-
   // Find matching emotion tag in text
   for (const [tag, filename] of Object.entries(emotionMap)) {
     if (text.includes(tag)) {
@@ -84,4 +74,29 @@ function typewriterEffect(fullText) {
     }
   }
   typeNextChar();
+}
+
+function options() {
+  // Function to show options after dialogue ends
+  characterImg.src = "../assets/about_me/normal.webp";
+  typewriterEffect("What would you like to talk about next?");
+
+  document.querySelector(".options").innerHTML = `
+    <div class="option")">
+      <img src="../assets/about_me/option_box.png" alt="Option box">
+      <span class="option-text">Tell me about your projects</span>
+    </div>
+    <div class="option")">
+      <img src="../assets/about_me/option_box.png" alt="Option box">
+      <span class="option-text">What are your hobbies?</span>
+    </div>
+    <div class="option"">
+      <img src="../assets/about_me/option_box.png" alt="Option box">
+      <span class="option-text">Share your experience</span>
+    </div>
+    <div class="option")">
+      <img src="../assets/about_me/option_box.png" alt="Option box">
+      <span class="option-text">What's your background?</span>
+    </div>
+  `;
 }

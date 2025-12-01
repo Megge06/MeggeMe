@@ -149,6 +149,8 @@ p img {
   max-height: 400px;
   padding: 1rem;
   cursor: var(--cursor-auto);
+
+  image-rendering: auto;
 }
 
 h2 {
