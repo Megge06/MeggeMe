@@ -3,6 +3,14 @@ let text = [
   `Quantum echo velvet prism solar pulse. [happy]`,
   `Nebula cascade twilight ember flux. [thinking]`,
 ];
+
+const dialogues = {
+  test1: [`test1 [dissatisfied]`, `test1 second line [paranoid]`],
+  test2: [`test2 [horror]`, `test2 second line [selfassured]`],
+  test3: [`test3 [smug]`, `test3 second line [tired]`],
+  test4: [`test4 [mentallyabsent]`, `test4 second line [sad]`],
+};
+
 const emotionMap = {
   "[dissatisfied]": "dissatisfied.webp",
   "[happy]": "happy.webp",
@@ -81,22 +89,54 @@ function options() {
   characterImg.src = "../assets/about_me/normal.webp";
   typewriterEffect("What would you like to talk about next?");
 
-  document.querySelector(".options").innerHTML = `
-    <div class="option")">
-      <img src="../assets/about_me/option_box.png" alt="Option box">
-      <span class="option-text">Tell me about your projects</span>
+  const optionsContainer = document.querySelector(".options");
+  optionsContainer.style.display = "flex";
+
+  optionsContainer.innerHTML = `
+    <div class="option test1">
+      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+      <span style="color: #6a4656;" class="option-text">Tell me about your projects</span>
     </div>
-    <div class="option")">
-      <img src="../assets/about_me/option_box.png" alt="Option box">
-      <span class="option-text">What are your hobbies?</span>
+    <div class="option test2">
+      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+      <span style="color: #6a4656;" class="option-text">What are your hobbies?</span>
     </div>
-    <div class="option"">
-      <img src="../assets/about_me/option_box.png" alt="Option box">
-      <span class="option-text">Share your experience</span>
+    <div class="option test3">
+      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+      <span style="color: #6a4656;" class="option-text">Share your experience</span>
     </div>
-    <div class="option")">
-      <img src="../assets/about_me/option_box.png" alt="Option box">
-      <span class="option-text">What's your background?</span>
+    <div class="option test4">
+      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+      <span style="color: #6a4656;" class="option-text">What's your background?</span>
     </div>
   `;
+
+  // Add hover and click event listeners to all options
+  const optionElements = document.querySelectorAll(".option");
+  optionElements.forEach((option) => {
+    const optionImg = option.querySelector("img");
+    const optionText = option.querySelector(".option-text");
+    const optionClass2 = option.getAttribute("class").split(" ")[1];
+    const originalImgSrc = optionImg.src;
+    const originalTextColor = optionText.style.color;
+
+    option.addEventListener("mouseenter", () => {
+      optionImg.src = "../assets/about_me/option_box.png";
+      optionText.style.color = "#ac3232";
+    });
+
+    option.addEventListener("mouseleave", () => {
+      optionImg.src = originalImgSrc;
+      optionText.style.color = originalTextColor;
+    });
+
+    option.addEventListener("click", () => {
+      text = dialogues[optionClass2];
+      index = 0;
+
+      optionsContainer.style.display = "none";
+      optionsContainer.innerHTML = "";
+      typewriterEffect(text[index]);
+    });
+  });
 }
