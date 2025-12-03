@@ -35,6 +35,10 @@ body {
   padding: 1.25rem;
   gap: 1rem;
   transition: background-color 200ms ease, color 200ms ease;
+
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .character {
@@ -113,6 +117,9 @@ a {
   z-index: -1;
   overflow: hidden;
   background: var(--bg);
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .bg-video video {
