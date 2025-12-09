@@ -3,12 +3,15 @@ layout: layouts/home
 title: "Photos"
 ---
 
-<h1>{{ title }}</h1>
-{% for photo in photos %}
-<img
-  class="photo"
-  src="{{ 'photos/' + photo.filename | url }}"
-  alt="{{ photo.title }}"
-  loading="lazy"
-/>
-{% endfor %}
+<div class="photos">
+  {% for photo in photos %}
+  <button class="photo-div">
+    <img
+      class="photo"
+      src="{{ photo.url | url }}"
+      alt="{{ photo.title }}"
+      loading="lazy"
+    />
+  </button>
+  {% endfor %}
+</div>
