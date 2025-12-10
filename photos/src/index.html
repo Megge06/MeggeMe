@@ -5,7 +5,10 @@ title: "Photos"
 
 <div class="photos">
   {% for photo in photos %}
-  <button class="photo-div">
+  <button
+    class="photo-div"
+    onclick="openLightbox('{{ photo.url | url }}', '{{ photo.title }}')"
+  >
     <img
       class="photo"
       src="{{ photo.url | url }}"
@@ -15,3 +18,60 @@ title: "Photos"
   </button>
   {% endfor %}
 </div>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img
+    id="lightbox-img"
+    class="lightbox-img"
+    src=""
+    alt=""
+    onclick="event.stopPropagation()"
+  />
+</div>
+
+<div class="menu">
+  <p id="time" class="time">Time</p>
+  <p id="date">Date</p>
+</div>
+
+<script>
+  function updateDateTime() {
+    const now = new Date();
+
+    const timeString = now.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+
+    const weekday = now.toLocaleDateString("en-US", {
+      weekday: "short",
+    });
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const dateString = `${weekday} ${day}/${month}`;
+
+    document.getElementById("time").textContent = timeString;
+    document.getElementById("date").textContent = dateString;
+  }
+
+  updateDateTime();
+
+  setInterval(updateDateTime, 1000);
+
+  function openLightbox(url, alt) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    lightboxImg.src = url;
+    lightboxImg.alt = alt;
+    lightbox.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+</script>
