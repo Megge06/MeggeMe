@@ -177,3 +177,15 @@ function options() {
     });
   });
 }
+
+// Back button hover effect
+const backButton = document.querySelector(".back-button");
+const backButtonImg = backButton.querySelector("img");
+
+backButton.addEventListener("mouseenter", () => {
+  backButtonImg.src = "../assets/about_me/milk_back.png";
+});
+
+backButton.addEventListener("mouseleave", () => {
+  backButtonImg.src = "../assets/about_me/milk_back_gray.png";
+});
