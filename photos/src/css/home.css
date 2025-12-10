@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "rodin";
+  src: url(../assets/FOT-RodinNTLG\ Pro\ DB.otf);
+}
+
+@font-face {
+  font-family: alarm;
+  src: url(../assets/alarm_clock.ttf);
+}
+
 :root {
   --cursor: url("../assets/cursor.cur"), auto;
 }
@@ -5,6 +15,24 @@
 * {
   cursor: var(--cursor) !important;
   height: 100%;
+}
+
+a,
+button,
+input,
+textarea,
+select,
+p,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+  cursor: var(--cursor) !important;
 }
 
 body {
@@ -24,11 +52,13 @@ body {
   background-size: 100% 100%, 100% 8px;
   cursor: var(--cursor) !important;
   margin: 0;
+  font: 16px "rodin", sans-serif;
+  color: #a8a8a8;
 }
 
 .photo-div {
-  width: 400px;
-  height: 300px;
+  width: 280px;
+  height: 210px;
   overflow: hidden;
   border-radius: 30px;
   border: 3px solid #d0d0d0;
@@ -47,11 +77,14 @@ body {
 
 .photos {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 20px;
+  max-height: 80vh;
+  align-content: flex-start;
 }
 
 .photo-div:hover {
@@ -59,16 +92,69 @@ body {
   border-color: transparent;
 }
 
+.menu {
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-size: 2rem;
+}
+
+.menu p {
+  height: auto;
+  margin: 0;
+  cursor: var(--cursor) !important;
+}
+
+.time {
+  font-family: alarm, sans-serif;
+  font-size: 4rem;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: var(--cursor);
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: var(--cursor);
+}
+
 @media (max-width: 768px) {
   .photos {
     flex-direction: column;
+    flex-wrap: nowrap;
     overflow-x: hidden;
     overflow-y: auto;
     align-items: center;
+    max-height: none;
   }
 
   .photo-div {
     width: 90dvw;
     max-width: 400px;
+  }
+
+  .menu {
+    display: none;
   }
 }
