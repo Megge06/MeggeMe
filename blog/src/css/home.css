@@ -6,6 +6,23 @@
   --cursor-grab: url("../assets/cursor/nso_grab.cur"), grabbing;
 }
 
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  cursor: var(--cursor-pointer);
+  transition: opacity 0.2s ease;
+  padding: 10px;
+  background-color: #fff8ff;
+  border: 3px solid #90f4e4;
+  border-radius: 0px;
+  box-shadow: 0 0 0 2px #5230d0;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 .post-list {
   position: fixed;
   bottom: 0;
@@ -167,9 +184,26 @@ h2 {
   max-height: 50dvh;
 }
 
-.back-button {
-  width: 16px;
-  height: 16px;
+.post-list-button {
+  z-index: 100;
+  cursor: var(--cursor-pointer);
+  transition: opacity 0.2s ease;
+  padding: 10px;
+  background-color: #fff8ff;
+  border: 3px solid #90f4e4;
+  border-radius: 0px;
+  box-shadow: 0 0 0 2px #5230d0;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.post-list-button img {
+  height: 1rem;
+
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 @media (max-aspect-ratio: 1/1) {
@@ -202,12 +236,18 @@ h2 {
   .post-window p {
     flex-shrink: 0;
   }
+  .post-window .post-header {
+    margin-top: 14vh;
+  }
+  .post-window .post-content {
+    margin-top: 1rem;
+  }
   .post-window .post-list {
     position: relative;
     width: 30vh;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 8rem;
+    margin-bottom: 50px;
     height: auto;
   }
   .blog-image {

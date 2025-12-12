@@ -170,6 +170,21 @@ a {
   white-space: nowrap;
 }
 
+.back-button {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  cursor: pointer;
+  width: 150px;
+}
+
+.back-button img {
+  width: 4rem;
+  height: auto;
+  display: block;
+}
+
 @media (orientation: portrait) {
   .dialogue-box img.dialogue {
     content: url("../assets/about_me/dialogue_box_vertical.png");

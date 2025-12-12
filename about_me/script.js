@@ -19,7 +19,7 @@ const dialogues = {
     `Oho you wanna know about this website? [smug]`,
     `If you want to know technical stuff you can always look at my GitHub, it's open source. [normal]`,
     `But this is the first website I've ever made so expect some jankiness. But I am quite happy with how it looks. [happy]`,
-    `The pages are inspired by "Persona", "Milk outside a bag of milk outside a bag of milk", "Needy Streamer Overload", and other stuff that I haven't added yet so we'll see what happens. [thinking]`,
+    `The pages are inspired by "Persona", "Milk outside a bag of milk outside a bag of milk", "Needy Streamer Overload", the Wii Menu, and other stuff that I haven't added yet so we'll see what happens. [thinking]`,
     `I apologize to anyone using this site on the phone, it's not the best experience. But hey, it works and that's more than a lot of other IndieWeb sites can say. [selfassured]`,
     `The static sites are really just vanilla HTML, CSS and JS. No fancy frameworks here. But it's my first website so what did you expect. The only non vanilla stuff I used was Eleventy for my Blog and Photos page. [normal]`,
     `If you have any suggestions or want to help me improve the site, feel free to reach out! [happy]`,
@@ -177,3 +177,15 @@ function options() {
     });
   });
 }
+
+// Back button hover effect
+const backButton = document.querySelector(".back-button");
+const backButtonImg = backButton.querySelector("img");
+
+backButton.addEventListener("mouseenter", () => {
+  backButtonImg.src = "../assets/about_me/milk_back.png";
+});
+
+backButton.addEventListener("mouseleave", () => {
+  backButtonImg.src = "../assets/about_me/milk_back_gray.png";
+});

@@ -1,4 +1,271 @@
-.photo {
-  width: 20%;
+@font-face {
+  font-family: "rodin";
+  src: url(../assets/FOT-RodinNTLG\ Pro\ DB.otf);
+}
+
+@font-face {
+  font-family: alarm;
+  src: url(../assets/alarm_clock.ttf);
+}
+
+:root {
+  --cursor: url("../assets/cursor.cur"), auto;
+}
+*,
+*::before,
+*::after {
+  cursor: var(--cursor) !important;
+}
+
+html {
+  height: 100%;
+  cursor: var(--cursor) !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(
+      ellipse 70% 500% at center,
+      white 0%,
+      white 30%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #ffffff 50%,
+      #eeeeee 50%,
+      #eeeeee 100%
+    );
+  background-size: 100% 100%, 100% 8px;
+  cursor: var(--cursor) !important;
+  margin: 0;
+  min-height: 100vh;
+  font: 16px "rodin", sans-serif;
+  color: #a8a8a8;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.2) 0px,
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.4;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.08),
+    rgba(0, 255, 0, 0.06),
+    rgba(0, 0, 255, 0.08)
+  );
+  background-size: 6px 100%;
+  mix-blend-mode: screen;
+  animation: vhs-noise 0.3s infinite;
+}
+
+@keyframes vhs-noise {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    opacity: 0.6;
+    transform: translateX(8px) translateY(-5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-7px) translateY(6px);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateX(6px) translateY(-8px);
+  }
+}
+
+.background-image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   height: auto;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.background-button-link {
+  position: fixed;
+  bottom: 50px;
+  left: 60px;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.background-button {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  width: 130px;
+  z-index: auto;
+  filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.1));
+  transition: ease-in-out 0.2s;
+  display: block;
+}
+
+.background-button-link:hover .background-button {
+  scale: 1.05;
+}
+
+.photo-div {
+  width: 280px;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 3px solid #d0d0d0;
+  background-color: white;
+  flex-shrink: 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.photos {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px;
+  max-height: 80vh;
+  align-content: flex-start;
+  height: 100%;
+}
+
+.photo-div:hover {
+  box-shadow: 0 0 0 2px #00bcd1, 0 0 15px #00bcd1;
+  border-color: transparent;
+}
+
+.menu {
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-size: 2rem;
+  z-index: -1;
+
+  pointer-events: none;
+}
+
+.menu p {
+  height: auto;
+  margin: 0;
+  cursor: var(--cursor) !important;
+}
+
+.time {
+  font-family: alarm, sans-serif;
+  font-size: 4rem;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: var(--cursor);
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: var(--cursor);
+}
+
+@media (max-width: 768px) {
+  .photos {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-items: center;
+    max-height: none;
+  }
+
+  .photo-div {
+    width: 90dvw;
+    max-width: 400px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .background-image {
+    display: none;
+  }
+
+  .background-button-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    text-decoration: none;
+  }
+
+  .background-button {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100px;
+    z-index: auto;
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.1));
+    transition: ease-in-out 0.2s;
+    display: block;
+  }
 }
