@@ -3,6 +3,19 @@ layout: layouts/home
 title: "Photos"
 ---
 
+<img
+  src="{{ '/assets/wii_menu.webp' | url }}"
+  alt=""
+  class="background-image"
+/>
+<a href="../../index.html" class="background-button-link">
+  <img
+    src="{{ '/assets/menu_button.webp' | url }}"
+    alt="Back to main page"
+    class="background-button"
+  />
+</a>
+
 <div class="photos">
   {% for photo in photos %}
   <button
