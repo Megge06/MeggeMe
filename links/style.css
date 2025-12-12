@@ -1,9 +1,175 @@
 @import url(reset.css);
 
+@font-face {
+  font-family: minecraft;
+  src: url(../fonts/Minecraft.ttf);
+}
+
 body {
   text-align: center;
+  font: 24px minecraft, sans-serif;
+  letter-spacing: 2px;
+  margin: 0;
+  background-color: #1a1a1a;
+  overflow-x: hidden;
+  image-rendering: pixelated;
+}
+
+:root {
+  --cube-size: 100vmax;
+  --cube-radius: 50vmax;
+  --cube-radius-neg: -50vmax;
+}
+
+.back-button {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  cursor: pointer;
+  width: 100px;
+}
+
+.back-button img {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.back-button:hover img {
+  filter: sepia(1) hue-rotate(180deg) saturate(2);
+}
+
+.panorama-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  perspective: var(--cube-radius);
+}
+
+.panorama {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--cube-radius));
+  animation: rotatePanorama 120s linear infinite;
+}
+
+@keyframes rotatePanorama {
+  from {
+    transform: translateZ(var(--cube-radius)) rotateY(0deg);
+  }
+  to {
+    transform: translateZ(var(--cube-radius)) rotateY(360deg);
+  }
+}
+
+.face {
+  position: absolute;
+  top: calc(var(--cube-size) / -2);
+  left: calc(var(--cube-size) / -2);
+  width: var(--cube-size);
+  height: var(--cube-size);
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  outline: 1px solid transparent;
+}
+
+.front {
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_0.webp");
+  transform: translateZ(var(--cube-radius-neg));
+}
+
+.right {
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_1.webp");
+  transform: rotateY(-90deg) translateZ(var(--cube-radius-neg));
+}
+
+.back {
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_2.webp");
+  transform: rotateY(-180deg) translateZ(var(--cube-radius-neg));
+}
+
+.left {
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_3.webp");
+  transform: rotateY(90deg) translateZ(var(--cube-radius-neg));
+}
+
+.top {
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_4.webp");
+  transform: rotateX(90deg) translateZ(var(--cube-radius-neg));
+}
+
+.bottom {
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_5.webp");
+  transform: rotateX(-90deg) translateZ(var(--cube-radius-neg));
+}
+
+.panorama-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
 }
 
 .minecraft-logo {
-  width: 50rem;
+  max-width: 800px;
+  width: 90%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  position: relative;
+  display: block;
+  margin: 10px auto;
+  width: 600px;
+  max-width: 90vw;
+}
+
+.button-container img {
+  display: block;
+  width: 100%;
+  transition: filter 0.3s ease;
+  image-rendering: pixelated;
+}
+
+.button-container .link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+}
+
+.button-container:hover img {
+  filter: sepia(1) hue-rotate(180deg) saturate(2);
 }
