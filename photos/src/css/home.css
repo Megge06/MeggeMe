@@ -11,28 +11,19 @@
 :root {
   --cursor: url("../assets/cursor.cur"), auto;
 }
-
-* {
+*,
+*::before,
+*::after {
   cursor: var(--cursor) !important;
-  height: 100%;
 }
 
-a,
-button,
-input,
-textarea,
-select,
-p,
-span,
-div,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-label {
+html {
+  height: 100%;
   cursor: var(--cursor) !important;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -52,8 +43,102 @@ body {
   background-size: 100% 100%, 100% 8px;
   cursor: var(--cursor) !important;
   margin: 0;
+  min-height: 100vh;
   font: 16px "rodin", sans-serif;
   color: #a8a8a8;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.2) 0px,
+    rgba(0, 0, 0, 0.2) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.4;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.08),
+    rgba(0, 255, 0, 0.06),
+    rgba(0, 0, 255, 0.08)
+  );
+  background-size: 6px 100%;
+  mix-blend-mode: screen;
+  animation: vhs-noise 0.3s infinite;
+}
+
+@keyframes vhs-noise {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    opacity: 0.6;
+    transform: translateX(8px) translateY(-5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-7px) translateY(6px);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translateX(6px) translateY(-8px);
+  }
+}
+
+.background-image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.background-button-link {
+  position: fixed;
+  bottom: 50px;
+  left: 60px;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.background-button {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  width: 130px;
+  z-index: auto;
+  filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.1));
+  transition: ease-in-out 0.2s;
+  display: block;
+}
+
+.background-button-link:hover .background-button {
+  scale: 1.05;
 }
 
 .photo-div {
@@ -65,7 +150,6 @@ body {
   background-color: white;
   flex-shrink: 0;
   transition: transform 0.2s, box-shadow 0.2s;
-  cursor: var(--cursor);
 }
 
 .photo {
@@ -85,6 +169,7 @@ body {
   padding: 20px;
   max-height: 80vh;
   align-content: flex-start;
+  height: 100%;
 }
 
 .photo-div:hover {
@@ -93,7 +178,7 @@ body {
 }
 
 .menu {
-  bottom: 10px;
+  bottom: 50px;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -103,6 +188,9 @@ body {
   width: 100%;
   height: auto;
   font-size: 2rem;
+  z-index: -1;
+
+  pointer-events: none;
 }
 
 .menu p {
@@ -156,5 +244,28 @@ body {
 
   .menu {
     display: none;
+  }
+
+  .background-image {
+    display: none;
+  }
+
+  .background-button-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    text-decoration: none;
+  }
+
+  .background-button {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100px;
+    z-index: auto;
+    filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.1));
+    transition: ease-in-out 0.2s;
+    display: block;
   }
 }
