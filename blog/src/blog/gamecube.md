@@ -24,3 +24,11 @@ I first had to troubleshoot the console, because of connection issues to my tv v
 <div><img src="{{ '/assets/blog_images/gamecube.webp' | url }}" alt="Chainsawman Image" class="blog-image" loading="lazy"></div>
 
 So far I only played Mario Kart: Double Dash!! because I didn't want to start playing any more story games before finishing my current backlog. I do howver still want to play the games I bought and the GameCube classics like The Legend of Zelda: The Wind Waker, Luigi's Mansion and Chibi-Robo!.
+
+But damn games are expensive for the GameCube. I thought retro games would be cheaper than modern ones, but somehow they aren't. I guess it's because especially the GameCube is quite popular nowadays despite its limited success back. in the day.
+
+Since I wrote this post, Jonathan gifted me Donkey Konga with the bongo controllers. It was really funny to play, but somehow I'm scared of annoying my neighbors. My roommate already complained about the noise once.
+
+## Conclusion
+
+All in all, I like my GameCube. I need to find the time to play more games on it, but I think it will be a fun console to have around.

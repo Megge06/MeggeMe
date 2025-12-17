@@ -120,8 +120,8 @@ body::after {
 
 .background-button-link {
   position: fixed;
-  bottom: 50px;
-  left: 60px;
+  bottom: 4vw;
+  left: 5vw;
   z-index: 1000;
   text-decoration: none;
 }
@@ -130,7 +130,7 @@ body::after {
   position: relative;
   bottom: auto;
   left: auto;
-  width: 130px;
+  width: 9vw;
   z-index: auto;
   filter: drop-shadow(6px 6px 0px rgba(0, 0, 0, 0.1));
   transition: ease-in-out 0.2s;
@@ -178,7 +178,7 @@ body::after {
 }
 
 .menu {
-  bottom: 50px;
+  bottom: 3.5vw;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -252,8 +252,8 @@ body::after {
 
   .background-button-link {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 5px;
+    left: 5px;
     z-index: 1000;
     text-decoration: none;
   }
