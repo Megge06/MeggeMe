@@ -21,25 +21,6 @@ body {
   --cube-radius-neg: -50vmax;
 }
 
-.back-button {
-  position: fixed;
-  top: 1.25rem;
-  left: 1.25rem;
-  z-index: 100;
-  cursor: pointer;
-  width: 100px;
-}
-
-.back-button img {
-  width: 100px;
-  height: auto;
-  display: block;
-}
-
-.back-button:hover img {
-  filter: sepia(1) hue-rotate(180deg) saturate(2);
-}
-
 .panorama-container {
   position: fixed;
   top: 0;
