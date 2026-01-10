@@ -1,0 +1,22 @@
+name: Deploy to Pi
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Sync to Web Root
+        run: |
+          rsync -av --exclude '.git' --exclude 'node_modules' ./ /var/www/html/
+
+      - name: Build Site
+        working-directory: /var/www/html
+        run: |
+          npm install
+          npm run build
