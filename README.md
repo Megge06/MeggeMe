@@ -1,14 +1,28 @@
 # IndieWeb Site
 
-Personal website with static pages and dynamic sections.
+Personal website featuring game-inspired themes and static page sections.
+
+## Features
+
+Each section has a unique aesthetic inspired by different games and media:
+
+- **Home** - Persona 3 inspired menu.
+- **About Me** - Visual novel style dialogue system ("A Bag of Milk" theme)
+- **Blog** - Twitter-like layout with draggable windows and Ame mascot
+- **Photos** - Wii Menu inspired photo gallery.
+- **Links** - Minecraft-inspired 3D panorama with social links
 
 ## Structure
 
-- `/` - Home page
-- `/about_me` - About page
-- `/links` - Links page
-- `/blog` - Blog built with Eleventy
-- `/photos` - Photo gallery built with Eleventy
+```text
+/                   Root HTML files (home, about_me, links)
+├── blog/           Eleventy-powered blog
+│   ├── src/        Source files
+│   └── _site/      Built static files
+└── photos/         Eleventy-powered photo gallery
+    ├── src/        Source files
+    └── _site/      Built static files
+```
 
 ## Development
 
@@ -18,18 +32,33 @@ Install dependencies:
 npm install
 ```
 
-Start development servers:
+Start all development servers:
 
 ```bash
 npm start
 ```
 
+Start individual sections:
+
+```bash
+npm run start:blog    # Blog only
+npm run start:photos  # Photos only
+```
+
 Build for production:
 
 ```bash
-npm run build
+npm run build           # Build all sections
+npm run build:blog      # Blog only
+npm run build:photos    # Photos only
+```
+
+Clean build artifacts:
+
+```bash
+npm run clean
 ```
 
 ## Deployment
 
-Deployed on Netlify with automatic builds from the main branch.
+Self-hosted on a Raspberry Pi. Built files are served directly from the repository.
