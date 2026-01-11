@@ -82,7 +82,7 @@ a {
   font-size: 1.7rem;
   line-height: 1.2;
   text-align: left;
-  pointer-events: none;
+  pointer-events: auto;
   white-space: pre-wrap;
   z-index: 2;
   box-sizing: border-box;

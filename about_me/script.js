@@ -70,7 +70,7 @@ let isTyping = false;
 
 typewriterEffect(text[index]);
 
-dialogueBox.addEventListener("click", function () {
+function handleDialogueClick() {
   //Event listener for clicking the dialogue box to change the text and image
 
   if (isTyping) return;
@@ -81,7 +81,10 @@ dialogueBox.addEventListener("click", function () {
   } else {
     options();
   }
-});
+}
+
+dialogueBox.addEventListener("click", handleDialogueClick);
+dialogueText.addEventListener("click", handleDialogueClick);
 
 function changeImage(text) {
   //Function for changing the character image based on the dialogue

@@ -137,6 +137,19 @@ title: "Blog"
   enableDragging(win);
   enableDragging(ame);
 
+  let zIndexCounter = 10;
+
+  function bringToFront(element) {
+    zIndexCounter++;
+    element.style.zIndex = zIndexCounter;
+  }
+
+  win.addEventListener("mousedown", () => bringToFront(win));
+  win.addEventListener("touchstart", () => bringToFront(win));
+
+  ame.addEventListener("mousedown", () => bringToFront(ame));
+  ame.addEventListener("touchstart", () => bringToFront(ame));
+
   async function loadPost(url, event) {
     console.log("Trying to fetch:", url);
     if (event) event.preventDefault();

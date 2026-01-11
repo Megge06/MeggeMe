@@ -86,12 +86,12 @@ body {
 }
 
 .top {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_4.webp");
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_5.webp");
   transform: rotateX(90deg) translateZ(var(--cube-radius-neg));
 }
 
 .bottom {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_5.webp");
+  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_4.webp");
   transform: rotateX(-90deg) translateZ(var(--cube-radius-neg));
 }
 
