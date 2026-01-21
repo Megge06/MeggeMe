@@ -99,12 +99,13 @@ const startButton = document.getElementById("startButton");
 const settingsButton = document.getElementById("settingsButton");
 const menuButton = document.getElementById("menuButton");
 const exitButton = document.getElementById("exitButton");
+const guestbook = document.getElementById("guestbook");
 
 window.addEventListener("load", () => {
   positionTriangle(startButton);
   if (document.fonts) {
     document.fonts.ready.then(() =>
-      positionTriangle(document.querySelector(".btn:hover") || startButton)
+      positionTriangle(document.querySelector(".btn:hover") || startButton),
     );
   }
 });
@@ -123,6 +124,10 @@ menuButton.addEventListener("mouseenter", () => {
 
 exitButton.addEventListener("mouseenter", () => {
   positionTriangle(exitButton);
+});
+
+guestbook.addEventListener("mouseenter", () => {
+  positionTriangle(guestbook);
 });
 
 window.addEventListener("resize", () => {

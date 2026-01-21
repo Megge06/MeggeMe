@@ -27,7 +27,8 @@ html {
 }
 
 body {
-  background: radial-gradient(
+  background:
+    radial-gradient(
       ellipse 70% 500% at center,
       white 0%,
       white 30%,
@@ -40,15 +41,21 @@ body {
       #eeeeee 50%,
       #eeeeee 100%
     );
-  background-size: 100% 100%, 100% 8px;
+  background-size:
+    100% 100%,
+    100% 8px;
   cursor: var(--cursor) !important;
   margin: 0;
   min-height: 100vh;
-  font: 16px "rodin", sans-serif;
+  font:
+    16px "rodin",
+    sans-serif;
   color: #a8a8a8;
   position: relative;
   overflow-x: hidden;
-  text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.2), -1px 0px 1px rgba(255, 0, 0, 0.1);
+  text-shadow:
+    1px 0px 2px rgba(0, 0, 0, 0.2),
+    -1px 0px 1px rgba(255, 0, 0, 0.1);
   animation: crt-flicker 0.15s infinite;
 }
 
@@ -183,7 +190,9 @@ body::after {
   border: 3px solid #d0d0d0;
   background-color: white;
   flex-shrink: 0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .photo {
@@ -207,12 +216,14 @@ body::after {
 }
 
 .photo-div:hover {
-  box-shadow: 0 0 0 2px #00bcd1, 0 0 15px #00bcd1;
+  box-shadow:
+    0 0 0 2px #00bcd1,
+    0 0 15px #00bcd1;
   border-color: transparent;
 }
 
 .menu {
-  bottom: 3.5vw;
+  bottom: 5vw;
   display: flex;
   flex-direction: column;
   gap: 0px;

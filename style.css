@@ -7,8 +7,16 @@
   font-style: normal;
 }
 body {
-  font-family: "Rodin Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family:
+    "Rodin Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
   color: #333;
   font-weight: normal;
   height: 100%;
@@ -16,6 +24,17 @@ body {
 }
 a {
   text-decoration: none;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 .bg-splash,
 .bg-loop {
@@ -54,8 +73,16 @@ body.splash-done .bg-splash {
   gap: 0rem;
 }
 .btn {
-  font-family: "Rodin Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family:
+    "Rodin Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
   font-size: 3.5rem;
   font-weight: normal;
   border: none;
@@ -65,11 +92,11 @@ body.splash-done .bg-splash {
   margin-left: auto;
   filter: url(#water-ripple);
   transition: 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  letter-spacing: -0.13em; /* tighten slightly */
+  letter-spacing: -0.13em;
   margin-top: 3rem;
 }
 .startButton {
-  rotate: -6deg;
+  rotate: -8deg;
   animation: floatStart 4s ease-in-out infinite;
   color: rgb(143, 242, 255);
 }
@@ -86,6 +113,11 @@ body.splash-done .bg-splash {
 .exitButton {
   rotate: 6deg;
   animation: floatExit 3.5s ease-in-out infinite;
+  color: rgb(124, 251, 255);
+}
+.guestbook {
+  rotate: 7deg;
+  animation: floatGuest 4s ease-in-out infinite;
   color: rgb(124, 251, 255);
 }
 
@@ -184,6 +216,22 @@ body.splash-done .bg-splash {
   }
   80% {
     transform: translate(7px, 0px);
+  }
+}
+
+@keyframes floatGuest {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  30% {
+    transform: translate(8px, -2px);
+  }
+  60% {
+    transform: translate(0px, 0px);
+  }
+  80% {
+    transform: translate(3px, -3px);
   }
 }
 

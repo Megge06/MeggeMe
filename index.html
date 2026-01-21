@@ -1,10 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A modern HTML template" />
     <meta name="author" content="Megge" />
+
+    <meta property="og:title" content="Homepage - Megge" />
+    <meta
+      property="og:description"
+      content="Welcome to my personal website featuring my blog, photos, and links"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://megge.me/" />
+    <meta
+      property="og:image"
+      content="https://megge.me/assets/home/favicon/favicon_512px.png"
+    />
+    <meta property="og:site_name" content="Megge's Personal Site" />
 
     <link
       rel="icon"
@@ -42,39 +55,66 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <video class="bg-splash" autoplay muted playsinline>
+    <video
+      class="bg-splash"
+      autoplay
+      muted
+      playsinline
+      aria-label="Background animation from Persona 3"
+    >
       <source src="assets/home/persona_3_splash.mp4" type="video/mp4" />
       <source src="assets/home/persona_3_splash_h264.mp4" type="video/mp4" />
     </video>
-    <video class="bg-loop" autoplay muted loop playsinline>
+    <video
+      class="bg-loop"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-label="Looping background animation from Persona 3"
+    >
       <source src="assets/home/persona_3_loop.mp4" type="video/mp4" />
       <source src="assets/home/persona_3_loop_h264.mp4" type="video/mp4" />
     </video>
-    <div class="buttons">
-      <p>
-        <a href="about_me/index.html" class="btn startButton" id="startButton"
-          >ABOUT ME</a
-        >
-      </p>
-      <p>
-        <a href="blog" id="settingsButton" class="btn settingsButton"
-          >MY BLOG</a
-        >
-      </p>
-      <p>
-        <a href="photos" id="menuButton" class="btn menuButton">PHOTOS</a>
-      </p>
-      <p>
-        <a href="links/index.html" id="exitButton" class="btn exitButton"
-          >LINKS</a
-        >
-      </p>
-      <div class="triangle-indicator"></div>
-      <div class="triangle-indicator triangle-indicator--red"></div>
-    </div>
+    <main>
+      <h1 class="sr-only">Megge's Personal Website</h1>
+      <nav aria-label="Main navigation">
+        <div class="buttons">
+          <p>
+            <a
+              href="about_me/index.html"
+              class="btn startButton"
+              id="startButton"
+              >ABOUT ME</a
+            >
+          </p>
+          <p>
+            <a href="blog" id="settingsButton" class="btn settingsButton"
+              >MY BLOG</a
+            >
+          </p>
+          <p>
+            <a href="photos" id="menuButton" class="btn menuButton">PHOTOS</a>
+          </p>
+          <p>
+            <a href="links/index.html" id="exitButton" class="btn exitButton"
+              >LINKS</a
+            >
+          </p>
+          <p>
+            <a href="" id="guestbook" class="btn guestbook">GUESTBOOK</a>
+          </p>
+          <div class="triangle-indicator" aria-hidden="true"></div>
+          <div
+            class="triangle-indicator triangle-indicator--red"
+            aria-hidden="true"
+          ></div>
+        </div>
+      </nav>
+    </main>
     <script src="script.js"></script>
   </body>
-  <svg style="position: absolute; width: 0; height: 0">
+  <svg style="position: absolute; width: 0; height: 0" aria-hidden="true">
     <defs>
       <filter id="water-ripple">
         <feTurbulence
