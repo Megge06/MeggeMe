@@ -104,10 +104,10 @@ body.splash-done .bg-splash {
   animation: floatExit 3.5s ease-in-out infinite;
   color: rgb(124, 251, 255);
 }
-.guestbook {
+.guestbookButton {
   rotate: 7deg;
   animation: floatGuest 4s ease-in-out infinite;
-  color: rgb(124, 251, 255);
+  color: rgb(90, 224, 229);
 }
 
 .btn.is-active {

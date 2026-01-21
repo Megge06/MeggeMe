@@ -99,7 +99,7 @@ const startButton = document.getElementById("startButton");
 const settingsButton = document.getElementById("settingsButton");
 const menuButton = document.getElementById("menuButton");
 const exitButton = document.getElementById("exitButton");
-const guestbook = document.getElementById("guestbook");
+const guestbookButton = document.getElementById("guestbookButton");
 
 window.addEventListener("load", () => {
   positionTriangle(startButton);
@@ -126,8 +126,8 @@ exitButton.addEventListener("mouseenter", () => {
   positionTriangle(exitButton);
 });
 
-guestbook.addEventListener("mouseenter", () => {
-  positionTriangle(guestbook);
+guestbookButton.addEventListener("mouseenter", () => {
+  positionTriangle(guestbookButton);
 });
 
 window.addEventListener("resize", () => {
