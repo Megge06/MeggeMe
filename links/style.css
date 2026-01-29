@@ -2,12 +2,14 @@
 
 @font-face {
   font-family: minecraft;
-  src: url(../fonts/Minecraft.ttf);
+  src: url(../fonts/minecraft.ttf);
 }
 
 body {
   text-align: center;
-  font: 24px minecraft, sans-serif;
+  font:
+    24px minecraft,
+    sans-serif;
   letter-spacing: 2px;
   margin: 0;
   background-color: #1a1a1a;
