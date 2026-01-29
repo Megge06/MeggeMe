@@ -29,10 +29,10 @@ const dialogues = {
   test3: [
     `Right now hmmm. I'm afraid I won't update this section often enough, but here is what I am doing right NOW. [thinking]`,
     `I just started studying and working so a lot of my time is going into that. A lot of new experiences and sometimes it's exhausting. [tired]`,
-    `But I am still keeping up on my hobbies. I am currently playing the Phoenix Wright Trilogy, Hearts of Iron and Persona 3 Reload. I also still dabble with my GameCube and PSP. [happy]`,
+    `But I am still keeping up on my hobbies. I am currently playing the Phoenix Wright Trilogy, Hearts of Iron IV and Persona 3 Reload. I also still dabble with my GameCube and PSP. [happy]`,
     `In terms of anime, I am currently rewatching a bunch of stuff, whatever I want at the moment. [normal]`,
     `I am still watching the seasonal shows of course but I am also trying to catch up with Re:Zero and finish watching ToraDora and SNAFU. [normal]`,
-    `Of course I am currently programming this website and that is really my only private project right now. I don't want to start anything new before I finish this. I may get a Raspberry Pi to self host my website, but I have no experience with that yet. [thinking]`,
+    `Of course I am currently programming this website and that is really my only private project right now. I don't want to start anything new before I finish this. I just got a Raspberry Pi to self host my website, but I have no experience with that yet. [thinking]`,
     `And that's pretty much what I'm doing right now. Of course I also spend time with friends and family and such, but that is not something relevant. [selfassured]`,
   ],
   test4: [
@@ -71,8 +71,6 @@ let isTyping = false;
 typewriterEffect(text[index]);
 
 function handleDialogueClick() {
-  //Event listener for clicking the dialogue box to change the text and image
-
   if (isTyping) return;
 
   if (index + 1 < text.length) {
@@ -87,8 +85,6 @@ dialogueBox.addEventListener("click", handleDialogueClick);
 dialogueText.addEventListener("click", handleDialogueClick);
 
 function changeImage(text) {
-  //Function for changing the character image based on the dialogue
-  // Find matching emotion tag in text
   for (const [tag, filename] of Object.entries(emotionMap)) {
     if (text.includes(tag)) {
       characterImg.src = `../assets/about_me/${filename}`;
@@ -99,7 +95,6 @@ function changeImage(text) {
 }
 
 function typewriterEffect(fullText) {
-  // Function for adding the text gradually
   isTyping = true;
 
   changeImage(fullText);
@@ -124,7 +119,6 @@ function typewriterEffect(fullText) {
 }
 
 function options() {
-  // Function to show options after dialogue ends
   characterImg.src = "../assets/about_me/normal.webp";
   typewriterEffect("What would you like to talk about?");
 
