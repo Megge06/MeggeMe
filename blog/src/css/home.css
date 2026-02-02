@@ -214,46 +214,58 @@ h2 {
     position: relative;
     left: auto;
     top: auto;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 300px;
+    width: 90%;
+    max-width: 450px;
     margin: 20px auto;
-    height: 90dvh;
-    padding: 2rem;
+    min-height: 85dvh;
+    height: auto;
+    padding: 1.5rem;
+    padding-top: 3rem;
     cursor: auto;
-    background: url("/blog/assets/images/window_vertical.png") no-repeat center /
-      contain;
+    background: url("/blog/assets/images/window_vertical.png") no-repeat
+      center / 100% 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transform: none;
   }
   .post-window h1 {
-    margin-top: 14vh;
-    font-size: 2rem;
+    margin-top: 10vh;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     flex-shrink: 0;
+    text-align: center;
   }
-  .post-window p {
+  .post-window > p {
     flex-shrink: 0;
+    font-size: clamp(0.875rem, 3.5vw, 1rem);
+    line-height: 1.5;
+    padding: 0 0.5rem;
   }
   .post-window .post-header {
-    margin-top: 14vh;
+    margin-top: 10vh;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
   }
   .post-window .post-content {
     margin-top: 1rem;
+    max-height: 60dvh;
+    padding: 0 0.5rem;
   }
   .post-window .post-list {
     position: relative;
-    width: 30vh;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+    margin-top: 1rem;
     height: auto;
+    max-height: 50dvh;
   }
   .blog-image {
-    max-width: 300px;
-    max-height: 400px;
-    padding: 0.5rem;
+    max-width: 100%;
+    max-height: 300px;
+    padding: 0.5rem 0;
+    object-fit: contain;
   }
   .ame-window {
     display: none;
@@ -262,10 +274,12 @@ h2 {
   .post-list ul {
     padding-inline-start: 0;
     padding: 0;
+    margin: 0;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
   }
 
   .post-list li {
@@ -275,5 +289,37 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .post-list li img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .post-list li a {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+    word-wrap: break-word;
+  }
+
+  .post-description {
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
+    line-height: 1.4;
+    padding: 0.25rem 0;
+  }
+
+  .post-date {
+    font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+  }
+
+  .back-button {
+    top: 10px;
+    left: 10px;
+    padding: 8px;
+  }
+
+  .back-button img {
+    width: 24px;
+    height: 24px;
   }
 }
