@@ -59,6 +59,21 @@ Clean build artifacts:
 npm run clean
 ```
 
+### Using Docker
+
+Build and run with Docker:
+
+```bash
+docker build -t indieweb .
+docker run -p 8080:8080 indieweb
+```
+
+Or use Docker Compose:
+
+```bash
+docker-compose up
+```
+
 ## Deployment
 
 Self-hosted on a Raspberry Pi. Built files are served directly from the repository.

@@ -1,0 +1,7 @@
+services:
+  indieweb:
+    build: .
+    container_name: indieweb_site
+    restart: always
+    ports:
+      - "80:80"

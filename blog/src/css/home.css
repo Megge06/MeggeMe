@@ -221,8 +221,8 @@ h2 {
     height: 90dvh;
     padding: 2rem;
     cursor: auto;
-    background: url("/blog/assets/images/window_vertical.png") no-repeat center /
-      contain;
+    background: url("/blog/assets/images/window_vertical.png") no-repeat
+      center / contain;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -244,10 +244,10 @@ h2 {
   }
   .post-window .post-list {
     position: relative;
-    width: 30vh;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 50px;
+    bottom: 0;
     height: auto;
   }
   .blog-image {
