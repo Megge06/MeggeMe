@@ -61,17 +61,16 @@ npm run clean
 
 ### Using Docker
 
-Build and run with Docker:
+Build and run with Docker Compose:
 
 ```bash
-docker build -t indieweb .
-docker run -p 8080:8080 indieweb
+docker compose up -d --build
 ```
 
-Or use Docker Compose:
+Stop the container:
 
 ```bash
-docker-compose up
+docker compose down
 ```
 
 ## Deployment
