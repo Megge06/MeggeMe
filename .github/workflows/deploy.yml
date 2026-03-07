@@ -1,0 +1,43 @@
+name: Deploy to Raspberry Pi
+
+# Run on main branch for security
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Connect to tailscale
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
+          tags: tag:ci
+
+      # Enter the pi and deploy
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.PI_IP }}
+          username: ${{ secrets.PI_USER }}
+          key: ${{ secrets.PI_SSH_KEY }}
+          script: |
+            export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+            echo "Navigating to repository..."
+            cd /var/www/html || exit 1
+
+            echo "Pulling latest code from main..."
+            git pull origin main
+
+            echo "Rebuilding and restarting Docker container..."
+            docker compose up -d --build
+
+            echo "Cleaning up unused Docker images..."
+            docker image prune -f
+
+            echo "Update Finished Successfully."
