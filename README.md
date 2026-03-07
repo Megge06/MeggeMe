@@ -6,22 +6,20 @@ Personal website featuring game-inspired themes and static page sections.
 
 Each section has a unique aesthetic inspired by different games and media:
 
-- **Home** - Persona 3 inspired menu.
-- **About Me** - Visual novel style dialogue system ("A Bag of Milk" theme)
-- **Blog** - Twitter-like layout with draggable windows and Ame mascot
-- **Photos** - Wii Menu inspired photo gallery.
-- **Links** - Minecraft-inspired 3D panorama with social links
+- **Home** - Persona 3 inspired menu
+- **About Me** - Milk Outside a Bag of Milk Outside a Bag of Milk
+- **Blog** - Needy Streamer Overload style blog page
+- **Photos** - Wii Menu inspired photo gallery
+- **Links** - Minecraft 3D panorama with social links
 
 ## Structure
 
 ```text
 /                   Root HTML files (home, about_me, links)
 ├── blog/           Eleventy-powered blog
-│   ├── src/        Source files
-│   └── _site/      Built static files
+│   └── src/        Source files
 └── photos/         Eleventy-powered photo gallery
-    ├── src/        Source files
-    └── _site/      Built static files
+    └── src/        Source files
 ```
 
 ## Development
