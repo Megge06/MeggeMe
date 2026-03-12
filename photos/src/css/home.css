@@ -314,3 +314,15 @@ body::after {
     display: block;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+  body::after {
+    animation: none;
+  }
+  .background-button-link:hover .background-button {
+    scale: 1;
+  }
+}

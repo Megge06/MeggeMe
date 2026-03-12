@@ -1,10 +1,11 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Links</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Connect with me on various platforms" />
+    <meta name="author" content="Megge" />
 
     <meta property="og:title" content="Links - Megge" />
     <meta property="og:description" content="Links - Megge" />
@@ -17,12 +18,11 @@
     <meta property="og:site_name" content="Links - Megge" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    <script src="script.js"></script>
 
     <link rel="icon" type="image/png" href="../assets/links/favicon.svg" />
   </head>
   <body>
-    <div class="panorama-container">
+    <div class="panorama-container" aria-hidden="true">
       <div class="panorama">
         <div class="face front"></div>
         <div class="face right"></div>
@@ -33,20 +33,17 @@
       </div>
     </div>
 
-    <div class="content-wrapper">
+    <main class="content-wrapper">
       <div class="logo">
         <img
           class="minecraft-logo"
           src="../assets/links/minecraft_logo.webp"
-          alt="Profile Picture"
+          alt="Minecraft logo"
         />
       </div>
-      <div>
+      <nav aria-label="Profile links">
         <div class="button-container">
-          <img
-            src="../assets/links/minecraft_button.webp"
-            alt="Minecraft Links"
-          />
+          <img src="../assets/links/minecraft_button.webp" alt="" />
           <a
             href="https://github.com/Megge06"
             target="_blank"
@@ -56,10 +53,7 @@
           >
         </div>
         <div class="button-container">
-          <img
-            src="../assets/links/minecraft_button.webp"
-            alt="Minecraft Links"
-          />
+          <img src="../assets/links/minecraft_button.webp" alt="" />
           <a
             href="https://steamcommunity.com/id/CringeAssMegge/"
             target="_blank"
@@ -69,10 +63,7 @@
           >
         </div>
         <div class="button-container">
-          <img
-            src="../assets/links/minecraft_button.webp"
-            alt="Minecraft Links"
-          />
+          <img src="../assets/links/minecraft_button.webp" alt="" />
           <a
             href="https://myanimelist.net/profile/Megge06"
             target="_blank"
@@ -82,10 +73,7 @@
           >
         </div>
         <div class="button-container">
-          <img
-            src="../assets/links/minecraft_button.webp"
-            alt="Minecraft Links"
-          />
+          <img src="../assets/links/minecraft_button.webp" alt="" />
           <a
             href="https://discord.com/users/_megge"
             target="_blank"
@@ -95,10 +83,7 @@
           >
         </div>
         <div class="button-container">
-          <img
-            src="../assets/links/minecraft_button.webp"
-            alt="Minecraft Links"
-          />
+          <img src="../assets/links/minecraft_button.webp" alt="" />
           <a
             href="https://www.tiktok.com/@megge066"
             target="_blank"
@@ -108,13 +93,11 @@
           >
         </div>
         <div class="button-container">
-          <img
-            src="../assets/links/minecraft_button.webp"
-            alt="Minecraft Links"
-          />
+          <img src="../assets/links/minecraft_button.webp" alt="" />
           <a href="../index.html" class="link">Quit</a>
         </div>
-      </div>
-    </div>
+      </nav>
+    </main>
+    <script src="script.js" defer></script>
   </body>
 </html>

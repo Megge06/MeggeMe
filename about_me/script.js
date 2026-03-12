@@ -126,20 +126,20 @@ function options() {
   optionsContainer.style.display = "flex";
 
   optionsContainer.innerHTML = `
-    <div class="option test1">
-      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+    <div class="option test1" role="button" tabindex="0">
+      <img src="../assets/about_me/option_box_gray.png" alt="">
       <span style="color: #6a4656;" class="option-text">Who are you?</span>
     </div>
-    <div class="option test2">
-      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+    <div class="option test2" role="button" tabindex="0">
+      <img src="../assets/about_me/option_box_gray.png" alt="">
       <span style="color: #6a4656;" class="option-text">Tell me about this site!</span>
     </div>
-    <div class="option test3">
-      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+    <div class="option test3" role="button" tabindex="0">
+      <img src="../assets/about_me/option_box_gray.png" alt="">
       <span style="color: #6a4656;" class="option-text">What are you doing right now?</span>
     </div>
-    <div class="option test4">
-      <img src="../assets/about_me/option_box_gray.png" alt="Option box">
+    <div class="option test4" role="button" tabindex="0">
+      <img src="../assets/about_me/option_box_gray.png" alt="">
       <span style="color: #6a4656;" class="option-text">Give me some recommendations!</span>
     </div>
   `;
@@ -172,17 +172,12 @@ function options() {
       optionsContainer.innerHTML = "";
       typewriterEffect(text[index]);
     });
+
+    option.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        option.click();
+      }
+    });
   });
 }
-
-// Back button hover effect
-const backButton = document.querySelector(".back-button");
-const backButtonImg = backButton.querySelector("img");
-
-backButton.addEventListener("mouseenter", () => {
-  backButtonImg.src = "../assets/about_me/milk_back.png";
-});
-
-backButton.addEventListener("mouseleave", () => {
-  backButtonImg.src = "../assets/about_me/milk_back_gray.png";
-});

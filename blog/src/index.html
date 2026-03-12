@@ -53,7 +53,7 @@ title: "Blog"
   <img
     class="ame"
     src="{{ '/assets/images/ame/neutral.png' | url }}"
-    onclick="setAmeExpressionTemp('smiling');"
+    onclick="setAmeExpressionTemp('smiling')"
   />
 </div>
 
@@ -116,7 +116,7 @@ title: "Blog"
         if (e.target !== el) return;
         beginDrag(t.clientX, t.clientY);
       },
-      { passive: true }
+      { passive: true },
     );
 
     window.addEventListener(
@@ -125,7 +125,7 @@ title: "Blog"
         const t = e.touches[0];
         moveDrag(t.clientX, t.clientY);
       },
-      { passive: true }
+      { passive: true },
     );
 
     window.addEventListener("touchend", (e) => {
@@ -151,12 +151,18 @@ title: "Blog"
   ame.addEventListener("touchstart", () => bringToFront(ame));
 
   async function loadPost(url, event) {
-    console.log("Trying to fetch:", url);
     if (event) event.preventDefault();
     try {
-      const postContent = await fetch(url);
-      const text = await postContent.text();
-      win.innerHTML = text;
+      const res = await fetch(url);
+      const text = await res.text();
+      const doc = new DOMParser().parseFromString(text, "text/html");
+      const header = doc.querySelector(".post-header");
+      const content = doc.querySelector(".post-content");
+      const button = doc.querySelector(".post-list-button");
+      win.innerHTML = "";
+      if (header) win.appendChild(document.adoptNode(header));
+      if (content) win.appendChild(document.adoptNode(content));
+      if (button) win.appendChild(document.adoptNode(button));
     } catch (err) {
       win.innerHTML =
         '<p>The blog post could not be loaded. <a onClick="loadList();">Return to Post List.</a></p>';

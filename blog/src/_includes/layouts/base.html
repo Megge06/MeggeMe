@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
     {% include "basehead.html" %} {% block head %} {% endblock %}
   </head>
   <body>
     <div class="sidebar">
-      <img
-        id="sidebarLeft"
-        src="{{ '/assets/images/sidebar_day.png' | url }}"
-        alt="Sidebar left"
-        class="left"
-      />
-      <img
-        id="sidebarRight"
-        src="{{ '/assets/images/sidebar_day.png' | url }}"
-        alt="Sidebar right"
-        class="right"
-      />
+      <img id="sidebarLeft" src="" alt="" class="left" />
+      <img id="sidebarRight" src="" alt="" class="right" />
     </div>
+    <script>
+      (function () {
+        var time = new Date().getHours();
+        var src =
+          time > 10 && time < 18
+            ? "{{ '/assets/images/sidebar_day.png' | url }}"
+            : time > 20 || time < 8
+            ? "{{ '/assets/images/sidebar_night.png' | url }}"
+            : "{{ '/assets/images/sidebar_dusk.png' | url }}";
+        document.getElementById("sidebarLeft").src = src;
+        document.getElementById("sidebarRight").src = src;
+      })();
+    </script>
     <div class="desktop">
-      <img src="{{ '/assets/images/desktop.png' | url }}" />
+      <img src="{{ '/assets/images/desktop.png' | url }}" alt="" />
     </div>
     {{ content | safe }}
-    <script>
-      const time = new Date().getHours();
-      const left = document.getElementById("sidebarLeft");
-      const right = document.getElementById("sidebarRight");
-      if (time > 10 && time < 18) {
-        left.src = "{{ '/assets/images/sidebar_day.png' | url }}";
-        right.src = "{{ '/assets/images/sidebar_day.png' | url }}";
-      } else if (time > 20 || time < 8) {
-        left.src = "{{ '/assets/images/sidebar_night.png' | url }}";
-        right.src = "{{ '/assets/images/sidebar_night.png' | url }}";
-      } else {
-        left.src = "{{ '/assets/images/sidebar_dusk.png' | url }}";
-        right.src = "{{ '/assets/images/sidebar_dusk.png' | url }}";
-      }
-    </script>
   </body>
 </html>

@@ -19,7 +19,6 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/index.html /usr/share/nginx/html/
 COPY --from=builder /app/style.css /usr/share/nginx/html/
 COPY --from=builder /app/script.js /usr/share/nginx/html/
-COPY --from=builder /app/404.html /usr/share/nginx/html/
 COPY --from=builder /app/reset.css /usr/share/nginx/html/
 COPY --from=builder /app/robots.txt /usr/share/nginx/html/
 

@@ -153,6 +153,18 @@ body {
   text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
 }
 
-.button-container:hover img {
+.button-container:hover img,
+.button-container:focus-within img {
   filter: sepia(1) hue-rotate(180deg) saturate(2);
+}
+
+.button-container .link:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panorama {
+    animation: none;
+  }
 }

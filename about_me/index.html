@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://megge.me/about_me/" />
     <meta
       property="og:image"
-      content="https://yoursite.com/assets/about_me/og-image.jpg"
+      content="https://megge.me/assets/about_me/og-image.jpg"
     />
     <meta property="og:site_name" content="About Me - Megge" />
 
@@ -60,26 +60,30 @@
       />
     </a>
     <div class="bg-video">
-      <video autoplay muted loop playsinline>
-        <source src="../assets/about_me/background.mp4" />
-        <source src="../assets/about_me/background_h264.mp4" />
+      <video autoplay muted loop playsinline aria-hidden="true">
+        <source src="../assets/about_me/background.mp4" type="video/mp4" />
+        <source src="../assets/about_me/background_h264.mp4" type="video/mp4" />
       </video>
     </div>
     <main>
       <div class="options"></div>
       <img
         class="character"
-        alt="Character"
+        alt="Character sprite"
         src="../assets/about_me/normal.webp"
       />
-      <br />
       <div class="dialogue-box">
         <img
           class="dialogue"
           src="../assets/about_me/dialogue_box.png"
           alt="Dialogue image"
         />
-        <div class="dialogue-text" role="note"></div>
+        <div
+          class="dialogue-text"
+          role="log"
+          aria-live="polite"
+          aria-atomic="false"
+        ></div>
       </div>
     </main>
     <script src="script.js"></script>

@@ -52,71 +52,68 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <video class="bg-splash" autoplay muted playsinline>
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      style="position: absolute; width: 0; height: 0; overflow: hidden"
+    >
+      <defs>
+        <filter id="water-ripple">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.001 0.001"
+            numOctaves="2"
+            result="noise"
+          >
+            <animate
+              attributeName="baseFrequency"
+              values="0.001 0.001; 0.005 0.005; 0.001 0.001"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </feTurbulence>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="20"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="ripple"
+          />
+        </filter>
+      </defs>
+    </svg>
+    <video class="bg-splash" autoplay muted playsinline aria-hidden="true">
       <source src="assets/home/persona_3_splash.mp4" type="video/mp4" />
       <source src="assets/home/persona_3_splash_h264.mp4" type="video/mp4" />
     </video>
-    <video class="bg-loop" autoplay muted loop playsinline>
+    <video class="bg-loop" autoplay muted loop playsinline aria-hidden="true">
       <source src="assets/home/persona_3_loop.mp4" type="video/mp4" />
       <source src="assets/home/persona_3_loop_h264.mp4" type="video/mp4" />
     </video>
-    <div class="buttons">
-      <p>
+    <main>
+      <nav class="buttons" aria-label="Main navigation">
         <a href="about_me/index.html" class="btn startButton" id="startButton"
           >ABOUT ME</a
         >
-      </p>
-      <p>
-        <a href="blog" id="settingsButton" class="btn settingsButton"
-          >MY BLOG</a
-        >
-      </p>
-      <p>
+        <a href="blog" id="settingsButton" class="btn settingsButton">MY BLOG</a>
         <a href="photos" id="menuButton" class="btn menuButton">PHOTOS</a>
-      </p>
-      <p>
         <a href="links/index.html" id="exitButton" class="btn exitButton"
           >LINKS</a
         >
-      </p>
-      <p>
         <a
           href="guestbook/index.html"
           id="guestbookButton"
           class="btn guestbookButton"
           >GUESTBOOK</a
         >
-      </p>
-      <div class="triangle-indicator"></div>
-      <div class="triangle-indicator triangle-indicator--red"></div>
-    </div>
-    <script src="script.js"></script>
+        <div class="triangle-indicator" aria-hidden="true"></div>
+        <div
+          class="triangle-indicator triangle-indicator--red"
+          aria-hidden="true"
+        ></div>
+      </nav>
+    </main>
+    <script src="script.js" defer></script>
   </body>
-  <svg style="position: absolute; width: 0; height: 0">
-    <defs>
-      <filter id="water-ripple">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.001 0.001"
-          numOctaves="2"
-          result="noise"
-        >
-          <animate
-            attributeName="baseFrequency"
-            values="0.001 0.001; 0.005 0.005; 0.001 0.001"
-            dur="2s"
-            repeatCount="indefinite"
-          />
-        </feTurbulence>
-        <feDisplacementMap
-          in="SourceGraphic"
-          in2="noise"
-          scale="20"
-          xChannelSelector="R"
-          yChannelSelector="G"
-          result="ripple"
-        />
-      </filter>
-    </defs>
-  </svg>
 </html>
