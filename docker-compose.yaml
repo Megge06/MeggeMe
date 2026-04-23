@@ -5,3 +5,10 @@ services:
     restart: always
     ports:
       - "80:80"
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    volumes:
+      - /home/pi/data:/data
+    restart: always

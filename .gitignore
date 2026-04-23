@@ -1,5 +1,6 @@
 .vscode/
-Ideas for IndieWeb.txt
+data/
+*.db
 
 blog/*
 !blog/.eleventy.js

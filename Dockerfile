@@ -29,6 +29,9 @@ COPY --from=builder /app/links /usr/share/nginx/html/links
 
 COPY --from=builder /app/blog/_site /usr/share/nginx/html/blog
 COPY --from=builder /app/photos/_site /usr/share/nginx/html/photos
+COPY --from=builder /app/guestbook /usr/share/nginx/html/guestbook
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
