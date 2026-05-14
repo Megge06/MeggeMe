@@ -1,13 +1,13 @@
 package main
 
 import (
+	"context"
 	"database/sql"
-	"encoding/json"
-	"fmt"
 	"log"
-	"net"
 	"net/http"
-	"sync"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	_ "modernc.org/sqlite"
@@ -16,7 +16,7 @@ import (
 func main() {
 
 	//Initialise SQL DB
-	db, err := sql.Open("sqlite", "guestbook.db")
+	db, err := sql.Open("sqlite", "/data/guestbook.db")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -34,129 +34,26 @@ func main() {
 
 	database := Database{db: db}
 
-	//Initialise handlers and permanently listen
-	http.HandleFunc("/health", healthHandler)
+	//Rate limit cleanup routine
+	rateLimitCleanup(2*time.Hour, 1*time.Hour)
+
+	//Initialise handlers
 	http.HandleFunc("/api/guestbook", database.guestbookHandler)
-	http.ListenAndServe(":8080", corsMiddleware(http.DefaultServeMux))
-}
 
-// Struct for Guestbook entries in db
-type Entry struct {
-	Name    string    `json:"name"`
-	Message string    `json:"message"`
-	Date    time.Time `json:"date"`
-}
-
-// Struct for entries from user
-type UserEntry struct {
-	Name    string `json:"name"`
-	Message string `json:"message"`
-}
-
-// Ratelimiter to stop spam
-// Mutex to only allow one entry into ratelimit at a time
-var (
-	ratelimiter = map[string]time.Time{}
-	rateMu      sync.Mutex
-)
-
-// Handle the DB with a Struct to access it
-type Database struct {
-	db *sql.DB
-}
-
-// Just a test to learn go http
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "System Healthy")
-}
-
-// Handles requests to the guestbook
-func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	if r.Method == "GET" {
-		// Get all entries
-		rows, err := d.db.Query("SELECT name, message, date FROM entries")
-		if err != nil {
-			http.Error(w, "database error", http.StatusInternalServerError)
-			return
-		}
-		defer rows.Close() // close when finished
-		entries := []Entry{}
-		// Put all entries into an array
-		for rows.Next() {
-			var e Entry
-			err := rows.Scan(&e.Name, &e.Message, &e.Date)
-			if err != nil {
-				http.Error(w, "scan error", http.StatusInternalServerError)
-				return
-			}
-			entries = append(entries, e)
-		}
-		// Put entries into json
-		json.NewEncoder(w).Encode(entries)
-	} else if r.Method == "POST" {
-		// Inserting new Entries
-		userEntry := UserEntry{}
-		err := json.NewDecoder(r.Body).Decode(&userEntry)
-		if err != nil {
-			http.Error(w, "decoding error", http.StatusBadRequest)
-			return
-		}
-		//Check Message length
-		if userEntry.Name == "" || userEntry.Message == "" {
-			http.Error(w, "input error", http.StatusBadRequest)
-			return
-		}
-		if len(userEntry.Name) > 50 || len(userEntry.Message) > 1000 {
-			http.Error(w, "input too long", http.StatusBadRequest)
-			return
-		}
-
-		// Check rate limit
-		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
-		if rateLimit(ip) {
-			http.Error(w, "rate limited", http.StatusTooManyRequests)
-			return
-		}
-
-		// The actual insertion
-		_, err = d.db.Exec("INSERT INTO entries (name, message, date) VALUES (?, ?, ?)",
-			userEntry.Name, userEntry.Message, time.Now())
-
-		if err != nil {
-			http.Error(w, "insertion error", http.StatusInternalServerError)
-			return
-		}
-
-		w.WriteHeader(http.StatusCreated)
-	} else {
-		// Error handling
-		w.WriteHeader(http.StatusMethodNotAllowed)
+	//Listen and serve through http.Server in background
+	server := &http.Server{
+		Addr:    ":8080",
+		Handler: corsMiddleware(http.DefaultServeMux),
 	}
-}
+	go server.ListenAndServe()
 
-// cors to handle Access Control
-func corsMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "https://megge.me")
-		if r.Method == "OPTIONS" {
-			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-			w.WriteHeader(http.StatusOK)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
-}
+	// Listen for shutdown and wait
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
 
-// Lock ip for 1 hour
-func rateLimit(ip string) bool {
-	rateMu.Lock()
-	defer rateMu.Unlock()
-	last, exists := ratelimiter[ip]
-	if exists && time.Since(last) < time.Hour {
-		return true
-	}
-	ratelimiter[ip] = time.Now()
-	return false
+	//After shutdown signal is received, wait 10 seconds and shut down
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	server.Shutdown(ctx)
 }

@@ -13,3 +13,4 @@ photos/*
 !photos/package-lock.json
 !photos/src/
 node_modules/
+backend/backend
