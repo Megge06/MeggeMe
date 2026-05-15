@@ -60,7 +60,7 @@ p img {
   cursor: var(--cursor-move);
 
   aspect-ratio: 800 / 670;
-  width: 50%;
+  width: clamp(400px, 50%, 700px);
   height: auto;
   z-index: 10;
 
@@ -74,8 +74,8 @@ p img {
   position: fixed;
   cursor: var(--cursor-move);
 
-  width: 405px;
-  height: 315px;
+  width: min(405px, 26vw);
+  height: auto;
   aspect-ratio: 405 / 315;
   right: 0;
 
@@ -94,7 +94,7 @@ p img {
   left: 50%;
   transform: translateX(-50%);
 
-  height: 250px;
+  height: 79%;
   width: auto;
 
   cursor: var(--cursor-grab);
@@ -106,7 +106,7 @@ p img {
 }
 
 .post-window h1 {
-  margin-top: 1rem;
+  margin-top: 2.5rem;
   font-size: 2rem;
   cursor: var(--cursor-text);
 }
@@ -157,6 +157,7 @@ p img {
   display: flex;
   gap: 1rem;
   font-size: 1.5rem;
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
   cursor: var(--cursor-text);
 }

@@ -224,7 +224,8 @@ body::after {
 }
 
 .menu {
-  bottom: 5vw;
+  bottom: 6.5vw;
+  left: 0;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -233,7 +234,7 @@ body::after {
   align-items: center;
   width: 100%;
   height: auto;
-  font-size: 2rem;
+  font-size: 1.5vw;
   z-index: -1;
   pointer-events: none;
 }
@@ -246,7 +247,7 @@ body::after {
 
 .time {
   font-family: alarm, sans-serif;
-  font-size: 4rem;
+  font-size: 3.5vw;
 }
 
 .lightbox {
