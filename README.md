@@ -15,11 +15,27 @@ Each section has a unique aesthetic inspired by different games and media:
 ## Structure
 
 ```text
-/                   Root HTML files (home, about_me, links)
+frontend/           All frontend/static content
+├── about_me/       About Me page
 ├── blog/           Eleventy-powered blog
 │   └── src/        Source files
-└── photos/         Eleventy-powered photo gallery
-    └── src/        Source files
+├── photos/         Eleventy-powered photo gallery
+│   └── src/        Source files
+├── links/          Links page
+├── guestbook/      Guestbook section
+├── assets/         Static assets (favicons, images)
+├── fonts/          Custom fonts
+├── index.html      Home page
+├── style.css       Global styles
+├── script.js       Global scripts
+└── reset.css       CSS reset
+
+backend/            Go backend
+├── go.mod
+├── go.sum
+├── main.go
+├── middleware.go
+└── ratelimit.go
 ```
 
 ## Development

@@ -1,0 +1,36 @@
+@import url("/reset.css");
+
+#guestbook {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+#pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#guestbook-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.entry {
+  border: 1px solid #000000;
+  padding: 2rem;
+  width: 50%;
+  min-width: 300px;
+}
