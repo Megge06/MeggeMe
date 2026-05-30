@@ -2,15 +2,15 @@
 data/
 *.db
 
-blog/*
-!blog/.eleventy.js
-!blog/package.json
-!blog/package-lock.json
-!blog/src/
-photos/*
-!photos/.eleventy.js
-!photos/package.json
-!photos/package-lock.json
-!photos/src/
+frontend/blog/*
+!frontend/blog/.eleventy.js
+!frontend/blog/package.json
+!frontend/blog/package-lock.json
+!frontend/blog/src/
+frontend/photos/*
+!frontend/photos/.eleventy.js
+!frontend/photos/package.json
+!frontend/photos/package-lock.json
+!frontend/photos/src/
 node_modules/
 backend/backend

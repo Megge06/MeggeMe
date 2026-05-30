@@ -2,12 +2,12 @@ FROM golang:1.26-alpine AS builder
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY backend/go.mod backend/go.sum ./
 RUN go mod download
 
-COPY backend/ ./backend/
+COPY backend/ ./
 
-RUN go build -o guestbook ./backend/
+RUN go build -o guestbook .
 
 FROM alpine
 
