@@ -1,11 +1,47 @@
-@import url("/reset.css");
+@import url("../reset.css");
+
+:root {
+  --p-red: #d92323;
+  --p-black: #0d0d0d;
+  --p-deep-red: #732424;
+  --p-gold: #8c6723;
+  --p-white: #ffffff;
+}
+
+@font-face {
+  font-family: "Franklin Gothic";
+  src: url("../fonts/FranklinGothic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family:
+    "Franklin Gothic",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+  background-color: var(--p-red);
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
 
 #guestbook {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1rem;
 }
 
 #pagination {
@@ -13,13 +49,79 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  padding: 1rem;
+  
 }
 
 #guestbook-form {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 30rem;
   gap: 1rem;
+  padding: 1rem;
+  color: var(--p-white);
+  background-color: var(--p-black);
+
+  clip-path: polygon(1% 3%, 99% 0%, 98% 96%, 0% 100%);
+}
+
+button {
+  padding: 0.5rem 1.25rem;
+  color: var(--p-white);
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  position: relative;
+  cursor: pointer;
+
+  filter: drop-shadow(2px 0 0 var(--p-white)) 
+          drop-shadow(-2px 0 0 var(--p-white)) 
+          drop-shadow(0 2px 0 var(--p-white)) 
+          drop-shadow(0 -2px 0 var(--p-white));
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--p-black);
+  z-index: -1;
+}
+
+button:hover {
+  translate: 2px 2px;
+}
+
+button:nth-of-type(4n+1) {
+  transform: rotate(1.5deg) skewX(-6deg);
+}
+button:nth-of-type(4n+1)::before {
+  clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
+}
+
+button:nth-of-type(4n+2) {
+  transform: rotate(-2deg) skewX(-9deg);
+}
+button:nth-of-type(4n+2)::before {
+  clip-path: polygon(2% 0%, 97% 4%, 100% 94%, 0% 98%);
+}
+
+button:nth-of-type(4n+3) {
+  transform: rotate(2.5deg) skewX(-4deg);
+}
+button:nth-of-type(4n+3)::before {
+  clip-path: polygon(1% 0%, 100% 2%, 96% 100%, 3% 95%);
+}
+
+button:nth-of-type(4n) {
+  transform: rotate(-1deg) skewX(-7deg);
+}
+button:nth-of-type(4n)::before {
+  clip-path: polygon(0% 0%, 99% 5%, 98% 95%, 2% 100%);
+}
+
+img{
+  width: 10rem;
 }
 
 .form-group {
@@ -28,9 +130,62 @@
   gap: 0.25rem;
 }
 
+.message {
+  padding: 0.75rem;
+  color: var(--p-white);
+  background-color: var(--p-black);
+  position: relative;
+  z-index: 1;
+}
+
+.individual-letter {
+  padding: 0.1rem;
+  margin: 0.05rem;
+  color: var(--p-black);
+  background-color: var(--p-white);
+  border: 2px solid var(--p-black);
+}
+
 .entry {
-  border: 1px solid #000000;
-  padding: 2rem;
-  width: 50%;
-  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.entry:nth-child(4n+1) .message {
+  transform: rotate(1.5deg) skewX(-6deg);
+  clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
+}
+
+.entry:nth-child(4n+2) .message {
+  transform: rotate(-2deg) skewX(-9deg);
+  clip-path: polygon(2% 0%, 97% 4%, 100% 94%, 0% 98%);
+}
+
+.entry:nth-child(4n+3) .message {
+  transform: rotate(2.5deg) skewX(-4deg);
+  clip-path: polygon(1% 0%, 100% 2%, 96% 100%, 3% 95%);
+}
+
+.entry:nth-child(4n) .message {
+  transform: rotate(-1deg) skewX(-7deg);
+  clip-path: polygon(0% 0%, 99% 5%, 98% 95%, 2% 100%);
+}
+
+.word-container{
+  margin-bottom: 0.125rem;
+}
+
+.name{
+  z-index: 2;
+  rotate: -5deg;
+  margin-left: -1rem;
+}
+
+.title{
+  font-size: 3rem;
+}
+
+textarea, input {
+  color: var(--p-black);
 }

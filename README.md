@@ -26,9 +26,9 @@ frontend/           All frontend/static content
 ├── assets/         Static assets (favicons, images)
 ├── fonts/          Custom fonts
 ├── index.html      Home page
-├── style.css       Global styles
-├── script.js       Global scripts
-└── reset.css       CSS reset
+├── style.css       Home styles
+├── script.js       Home scripts
+└── reset.css       Global CSS reset
 
 backend/            Go backend
 ├── go.mod

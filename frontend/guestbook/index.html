@@ -13,22 +13,31 @@
     <meta property="og:image" content="https://megge.me/assets/home/favicon/favicon_512px.png" />
     <meta property="og:site_name" content="Guestbook - Megge" />
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/home/favicon/favicon_16px.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/home/favicon/favicon_32px.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="../assets/home/favicon/favicon_48px.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/home/favicon/favicon_180px.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="../assets/home/favicon/favicon_512px.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/guestbook/favicon/favicon_16px.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/guestbook/favicon/favicon_32px.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="../assets/guestbook/favicon/favicon_48px.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/guestbook/favicon/favicon_180px.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/guestbook/favicon/favicon_512px.png" />
 
     <title>Guestbook - Megge</title> 
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main id="guestbook">
-      <h1>Guestbook</h1>
+      <img id="logo" src="../assets/guestbook/logo.png" alt="Phan-Site logo" />
+      <h1 class="title">Phan-Site</h1>
 
       <section id="entries" aria-label="Guestbook entries">
         <article class="entry">
-          <p class="name">Megge Mega</p>
+          <p class="name">Megge</p>
+          <p class="message">This is an example message.</p>
+        </article>
+        <article class="entry">
+          <p class="name">Megge</p>
+          <p class="message">This is an example message.</p>
+        </article>
+        <article class="entry">
+          <p class="name">Megge</p>
           <p class="message">This is an example message.</p>
         </article>
       </section>
@@ -52,7 +61,7 @@
           <textarea id="form-message" name="message" maxlength="1000" required></textarea>
         </div>
 
-        <button type="submit">Post Message</button>
+        <button type="submit" id="submit">Post Message</button>
       </form>
     </main>
     <script src="script.js" defer></script>
