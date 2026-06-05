@@ -26,8 +26,13 @@ func main() {
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL,
 	message TEXT NOT NULL,
-	date DATETIME NOT NULL
+	date DATETIME NOT NULL,
+	avatar TEXT NOT NULL DEFAULT 'phantom.png'
 	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -24,19 +24,14 @@
   </head>
   <body>
     <main id="guestbook">
-      <img id="logo" src="../assets/guestbook/logo.png" alt="Phan-Site logo" />
+      <img id="logo" src="../assets/guestbook/logo.png" alt="" aria-hidden="true" />
       <h1 class="title">Phan-Site</h1>
 
       <section id="entries" aria-label="Guestbook entries">
         <article class="entry">
-          <p class="name">Megge</p>
-          <p class="message">This is an example message.</p>
-        </article>
-        <article class="entry">
-          <p class="name">Megge</p>
-          <p class="message">This is an example message.</p>
-        </article>
-        <article class="entry">
+          <div class="avatar-wrap">
+            <img class="avatar" src="../assets/guestbook/chat_icons/akechi.png"/>
+          </div>
           <p class="name">Megge</p>
           <p class="message">This is an example message.</p>
         </article>
@@ -47,13 +42,23 @@
         <span id="page-display" aria-live="polite" aria-atomic="true">Page 1</span>
         <button id="next">Next Page</button>
       </nav>
-
       <form id="guestbook-form">
         <p id="form-header">Leave a Message</p>
-        
-        <div class="form-group">
-          <label for="form-name">Name</label>
-          <input id="form-name" name="name" type="text" maxlength="50" required />
+        <div class="form-top-row">
+          <div class="form-group">
+            <label for="form-name">Name</label>
+            <input id="form-name" name="name" type="text" maxlength="50" required />
+          </div>
+
+          <div class="form-group">
+            <label>Avatar</label>
+            <div id="avatar-carousel">
+              <button type="button" id="avatar-prev" aria-label="Previous Avatar">&lt;</button>
+              <img id="avatar-preview" src="../assets/guestbook/chat_icons/phantom.png" alt="phantom" />
+              <button type="button" id="avatar-next" aria-label="Next Avatar">&gt;</button>
+            </div>
+            <input type="hidden" id="form-avatar" name="avatar" value="phantom" />
+          </div>
         </div>
 
         <div class="form-group">

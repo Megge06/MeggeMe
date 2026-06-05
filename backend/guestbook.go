@@ -14,12 +14,14 @@ type Entry struct {
 	Name    string    `json:"name"`
 	Message string    `json:"message"`
 	Date    time.Time `json:"date"`
+	Avatar  string    `json:"avatar"`
 }
 
 // Struct for entries from user
 type UserEntry struct {
 	Name    string `json:"name"`
 	Message string `json:"message"`
+	Avatar  string `json:"avatar"`
 }
 
 // Handle the DB with a Struct to access it
@@ -27,11 +29,21 @@ type Database struct {
 	db *sql.DB
 }
 
+// White-list map of all avatars
+var allowedAvatars = map[string]bool{
+	"akechi": true, "alibaba": true, "ann": true, "caroline": true,
+	"chihaya": true, "futaba": true, "haru": true, "hifumi": true,
+	"justine": true, "kawakami": true, "makoto": true, "mishima": true,
+	"munehisa": true, "ohya": true, "phantom": true, "ryuji": true,
+	"shinya": true, "sojiro": true, "takemi": true, "yoshida": true,
+	"yusuke": true, "yhosizawa": true,
+}
+
 // Handles requests to the guestbook
 func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if r.Method == "GET" {
-		// Get requested entries from URl
+		// Get requested entries from URL
 		pageStr := r.URL.Query().Get("page")
 		limitStr := r.URL.Query().Get("limit")
 
@@ -47,7 +59,7 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 		offset := (page - 1) * limit
 
 		// Get all entries
-		rows, err := d.db.Query("SELECT name, message, date FROM entries ORDER BY date DESC LIMIT ? OFFSET ?", limit, offset)
+		rows, err := d.db.Query("SELECT name, message, date, avatar FROM entries ORDER BY date DESC LIMIT ? OFFSET ?", limit, offset)
 		if err != nil {
 			http.Error(w, "database error", http.StatusInternalServerError)
 			return
@@ -57,7 +69,7 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 		// Put all entries into an array
 		for rows.Next() {
 			var e Entry
-			err := rows.Scan(&e.Name, &e.Message, &e.Date)
+			err := rows.Scan(&e.Name, &e.Message, &e.Date, &e.Avatar)
 			if err != nil {
 				http.Error(w, "scan error", http.StatusInternalServerError)
 				return
@@ -84,6 +96,16 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// Fallback to default avatar
+		if userEntry.Avatar == "" {
+			userEntry.Avatar = "phantom"
+		}
+
+		if !allowedAvatars[userEntry.Avatar] {
+			http.Error(w, "invalid avatar selection", http.StatusBadRequest)
+			return
+		}
+
 		// Check rate limit
 		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
 		if rateLimit(ip) {
@@ -92,8 +114,8 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// The actual insertion
-		_, err = d.db.Exec("INSERT INTO entries (name, message, date) VALUES (?, ?, ?)",
-			userEntry.Name, userEntry.Message, time.Now())
+		_, err = d.db.Exec("INSERT INTO entries (name, message, date, avatar) VALUES (?, ?, ?, ?)",
+			userEntry.Name, userEntry.Message, time.Now(), userEntry.Avatar)
 
 		if err != nil {
 			http.Error(w, "insertion error", http.StatusInternalServerError)
