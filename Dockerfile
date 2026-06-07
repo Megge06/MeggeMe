@@ -20,7 +20,6 @@ COPY --from=builder /app/frontend/index.html /usr/share/nginx/html/
 COPY --from=builder /app/frontend/style.css /usr/share/nginx/html/
 COPY --from=builder /app/frontend/script.js /usr/share/nginx/html/
 COPY --from=builder /app/frontend/reset.css /usr/share/nginx/html/
-COPY --from=builder /app/frontend/robots.txt /usr/share/nginx/html/
 
 COPY --from=builder /app/frontend/about_me /usr/share/nginx/html/about_me
 COPY --from=builder /app/frontend/assets /usr/share/nginx/html/assets
