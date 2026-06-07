@@ -13,8 +13,8 @@
   font-style: normal;
 }
 
-button:focus-visible, 
-input:focus-visible, 
+button:focus-visible,
+input:focus-visible,
 textarea:focus-visible {
   outline: 3px dashed var(--p-white);
   outline-offset: 4px;
@@ -24,7 +24,9 @@ button:focus-visible {
   translate: 2px 2px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -40,11 +42,21 @@ body {
     Cantarell,
     sans-serif;
   background-color: var(--p-red);
+  background-image:
+    radial-gradient(circle, #a01818 2.5px, transparent 2.5px),
+    radial-gradient(circle, #a01818 2.5px, transparent 2.5px);
+  background-size: 20px 20px;
+  background-position:
+    0 0,
+    10px 10px;
   text-transform: uppercase;
   font-size: 1rem;
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -63,7 +75,6 @@ button, input, textarea, select {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
-  
 }
 
 #guestbook-form {
@@ -71,11 +82,20 @@ button, input, textarea, select {
   flex-direction: column;
   width: 80%;
   max-width: 35rem;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
   color: var(--p-white);
   background-color: var(--p-black);
   clip-path: polygon(1% 3%, 99% 0%, 98% 96%, 0% 100%);
+}
+
+#form-header {
+  font-size: 1.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--p-red);
+  margin-bottom: 0.25rem;
+  transform: skewX(-4deg);
+  width: fit-content;
 }
 
 button {
@@ -87,10 +107,9 @@ button {
   position: relative;
   cursor: pointer;
 
-  filter: drop-shadow(2px 0 0 var(--p-white)) 
-          drop-shadow(-2px 0 0 var(--p-white)) 
-          drop-shadow(0 2px 0 var(--p-white)) 
-          drop-shadow(0 -2px 0 var(--p-white));
+  filter: drop-shadow(2px 0 0 var(--p-white))
+    drop-shadow(-2px 0 0 var(--p-white)) drop-shadow(0 2px 0 var(--p-white))
+    drop-shadow(0 -2px 0 var(--p-white));
 }
 
 button::before {
@@ -105,24 +124,24 @@ button:hover {
   translate: 2px 2px;
 }
 
-button:nth-of-type(4n+1) {
+button:nth-of-type(4n + 1) {
   transform: rotate(1.5deg) skewX(-6deg);
 }
-button:nth-of-type(4n+1)::before {
+button:nth-of-type(4n + 1)::before {
   clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
 }
 
-button:nth-of-type(4n+2) {
+button:nth-of-type(4n + 2) {
   transform: rotate(-2deg) skewX(-9deg);
 }
-button:nth-of-type(4n+2)::before {
+button:nth-of-type(4n + 2)::before {
   clip-path: polygon(2% 0%, 97% 4%, 100% 94%, 0% 98%);
 }
 
-button:nth-of-type(4n+3) {
+button:nth-of-type(4n + 3) {
   transform: rotate(2.5deg) skewX(-4deg);
 }
-button:nth-of-type(4n+3)::before {
+button:nth-of-type(4n + 3)::before {
   clip-path: polygon(1% 0%, 100% 2%, 96% 100%, 3% 95%);
 }
 
@@ -133,14 +152,22 @@ button:nth-of-type(4n)::before {
   clip-path: polygon(0% 0%, 99% 5%, 98% 95%, 2% 100%);
 }
 
-img{
-  width: 10rem;
+img {
+  width: 20rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+#guestbook-form label {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--p-red);
+  border-left: 3px solid var(--p-red);
+  padding-left: 0.4rem;
 }
 
 .message {
@@ -163,23 +190,23 @@ img{
 
 .entry {
   display: grid;
-  grid-template-columns: 3rem 1fr; 
+  grid-template-columns: 3rem 1fr;
   column-gap: 0rem;
   row-gap: 0rem;
   align-items: center;
 }
 
-.entry:nth-child(4n+1) .message {
+.entry:nth-child(4n + 1) .message {
   transform: rotate(1.5deg) skewX(-6deg);
   clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
 }
 
-.entry:nth-child(4n+2) .message {
+.entry:nth-child(4n + 2) .message {
   transform: rotate(-2deg) skewX(-9deg);
   clip-path: polygon(2% 0%, 97% 4%, 100% 94%, 0% 98%);
 }
 
-.entry:nth-child(4n+3) .message {
+.entry:nth-child(4n + 3) .message {
   transform: rotate(2.5deg) skewX(-4deg);
   clip-path: polygon(1% 0%, 100% 2%, 96% 100%, 3% 95%);
 }
@@ -189,7 +216,7 @@ img{
   clip-path: polygon(0% 0%, 99% 5%, 98% 95%, 2% 100%);
 }
 
-.word-container{
+.word-container {
   margin-bottom: 0.125rem;
 }
 
@@ -202,12 +229,38 @@ img{
   translate: 0 0.4rem;
 }
 
-.title{
-  font-size: 3rem;
+.title {
+  font-size: 5rem;
+  color: var(--p-white);
+  -webkit-text-stroke: 3px var(--p-black);
+  transform: rotate(-2deg) skewX(-6deg);
+  filter: drop-shadow(5px 5px 0 var(--p-black));
+  margin-bottom: 0.5rem;
 }
 
-textarea, input {
+textarea,
+input {
   color: var(--p-black);
+}
+
+#guestbook-form input,
+#guestbook-form textarea {
+  background-color: var(--p-white);
+  border: none;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+}
+
+#guestbook-form input {
+  clip-path: polygon(0% 4%, 100% 0%, 99% 94%, 1% 100%);
+  transform: skewX(-3deg);
+}
+
+#guestbook-form textarea {
+  clip-path: polygon(1% 2%, 99% 0%, 100% 96%, 0% 100%);
+  transform: skewX(-2deg);
+  resize: none;
+  min-height: 5rem;
 }
 
 .avatar-wrap {
@@ -219,9 +272,9 @@ textarea, input {
   z-index: 2;
   margin-left: 0.25rem;
 
-  background-color: #959595; 
-  border: 2px solid var(--p-white); 
-  transform: rotate(-6deg) skewX(-6deg); 
+  background-color: #80ff23;
+  border: 2px solid var(--p-white);
+  transform: rotate(-6deg) skewX(-6deg);
   box-shadow: 0 0 0 4px var(--p-black);
 }
 
@@ -229,12 +282,12 @@ textarea, input {
   position: absolute;
   bottom: -1px;
   left: 50%;
-  
-  width: 3.25rem;  
-  height: 3.25rem; 
-  object-fit: contain; 
-  
-  translate: -58%; 
+
+  width: 3.25rem;
+  height: 3.25rem;
+  object-fit: contain;
+
+  translate: -50%;
 }
 
 .form-top-row {

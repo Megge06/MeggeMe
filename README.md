@@ -11,6 +11,7 @@ Each section has a unique aesthetic inspired by different games and media:
 - **Blog** - Needy Streamer Overload style blog page
 - **Photos** - Wii Menu inspired photo gallery
 - **Links** - Minecraft 3D panorama with social links
+- **Guestbook** - Persona 5 themed interactive guestbook with avatar selection
 
 ## Structure
 
@@ -18,11 +19,9 @@ Each section has a unique aesthetic inspired by different games and media:
 frontend/           All frontend/static content
 ├── about_me/       About Me page
 ├── blog/           Eleventy-powered blog
-│   └── src/        Source files
 ├── photos/         Eleventy-powered photo gallery
-│   └── src/        Source files
 ├── links/          Links page
-├── guestbook/      Guestbook section
+├── guestbook/      Guestbook page
 ├── assets/         Static assets (favicons, images)
 ├── fonts/          Custom fonts
 ├── index.html      Home page
@@ -30,13 +29,29 @@ frontend/           All frontend/static content
 ├── script.js       Home scripts
 └── reset.css       Global CSS reset
 
-backend/            Go backend
+backend/            Go backend (guestbook API)
+├── Dockerfile
 ├── go.mod
 ├── go.sum
-├── main.go
-├── middleware.go
-└── ratelimit.go
+├── main.go         HTTP server, SQLite init, graceful shutdown
+├── guestbook.go    Guestbook REST API (GET/POST /api/guestbook)
+├── middleware.go   CORS middleware
+└── ratelimit.go    IP-based rate limiting
+
+nginx.conf          Reverse proxy config (static files + /api/guestbook)
+docker-compose.yaml Multi-service compose (nginx + Go backend)
 ```
+
+## Backend
+
+The Go backend exposes a single REST endpoint:
+
+| Method | Path                            | Description                       |
+|--------|---------------------------------|-----------------------------------|
+| `GET`  | `/api/guestbook?page=N&limit=N` | Fetch paginated guestbook entries |
+| `POST` | `/api/guestbook`                | Submit a new guestbook entry      |
+
+Entries are stored in a SQLite database at `/data/guestbook.db`. Each entry includes a name, message, date, and an avatar chosen from a whitelist of Persona characters.
 
 ## Development
 
@@ -81,7 +96,7 @@ Build and run with Docker Compose:
 docker compose up -d --build
 ```
 
-Stop the container:
+Stop the containers:
 
 ```bash
 docker compose down
@@ -89,4 +104,4 @@ docker compose down
 
 ## Deployment
 
-Self-hosted on a Raspberry Pi. Built files are served directly from the repository.
+Self-hosted on a Raspberry Pi. Docker Compose runs two services: a nginx container serving static files and proxying `/api/guestbook` to the Go backend, which persists guestbook data to `/home/pi/data` on the host.

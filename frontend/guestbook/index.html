@@ -10,27 +10,62 @@
     <meta property="og:description" content="Guestbook - Megge" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://megge.me/" />
-    <meta property="og:image" content="https://megge.me/assets/home/favicon/favicon_512px.png" />
+    <meta
+      property="og:image"
+      content="https://megge.me/assets/home/favicon/favicon_512px.png"
+    />
     <meta property="og:site_name" content="Guestbook - Megge" />
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/guestbook/favicon/favicon_16px.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/guestbook/favicon/favicon_32px.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="../assets/guestbook/favicon/favicon_48px.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/guestbook/favicon/favicon_180px.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="../assets/guestbook/favicon/favicon_512px.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/guestbook/favicon/favicon_16px.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/guestbook/favicon/favicon_32px.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="../assets/guestbook/favicon/favicon_48px.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/guestbook/favicon/favicon_180px.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../assets/guestbook/favicon/favicon_512px.png"
+    />
 
-    <title>Guestbook - Megge</title> 
+    <title>Guestbook - Megge</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main id="guestbook">
-      <img id="logo" src="../assets/guestbook/logo.png" alt="" aria-hidden="true" />
+      <img
+        id="logo"
+        src="../assets/guestbook/logo.webp"
+        alt=""
+        aria-hidden="true"
+      />
       <h1 class="title">Phan-Site</h1>
 
       <section id="entries" aria-label="Guestbook entries">
         <article class="entry">
           <div class="avatar-wrap">
-            <img class="avatar" src="../assets/guestbook/chat_icons/akechi.png"/>
+            <img
+              class="avatar"
+              src="../assets/guestbook/chat_icons/futaba.webp"
+            />
           </div>
           <p class="name">Megge</p>
           <p class="message">This is an example message.</p>
@@ -39,7 +74,9 @@
 
       <nav id="pagination" aria-label="Pagination">
         <button id="prev">Previous Page</button>
-        <span id="page-display" aria-live="polite" aria-atomic="true">Page 1</span>
+        <span id="page-display" aria-live="polite" aria-atomic="true"
+          >Page 1</span
+        >
         <button id="next">Next Page</button>
       </nav>
       <form id="guestbook-form">
@@ -47,23 +84,51 @@
         <div class="form-top-row">
           <div class="form-group">
             <label for="form-name">Name</label>
-            <input id="form-name" name="name" type="text" maxlength="50" required />
+            <input
+              id="form-name"
+              name="name"
+              type="text"
+              maxlength="50"
+              required
+            />
           </div>
 
           <div class="form-group">
             <label>Avatar</label>
             <div id="avatar-carousel">
-              <button type="button" id="avatar-prev" aria-label="Previous Avatar">&lt;</button>
-              <img id="avatar-preview" src="../assets/guestbook/chat_icons/phantom.png" alt="phantom" />
-              <button type="button" id="avatar-next" aria-label="Next Avatar">&gt;</button>
+              <button
+                type="button"
+                id="avatar-prev"
+                aria-label="Previous Avatar"
+              >
+                &lt;
+              </button>
+              <img
+                id="avatar-preview"
+                src="../assets/guestbook/chat_icons/phantom.webp"
+                alt="phantom"
+              />
+              <button type="button" id="avatar-next" aria-label="Next Avatar">
+                &gt;
+              </button>
             </div>
-            <input type="hidden" id="form-avatar" name="avatar" value="phantom" />
+            <input
+              type="hidden"
+              id="form-avatar"
+              name="avatar"
+              value="phantom"
+            />
           </div>
         </div>
 
         <div class="form-group">
           <label for="form-message">Message</label>
-          <textarea id="form-message" name="message" maxlength="1000" required></textarea>
+          <textarea
+            id="form-message"
+            name="message"
+            maxlength="1000"
+            required
+          ></textarea>
         </div>
 
         <button type="submit" id="submit">Post Message</button>
