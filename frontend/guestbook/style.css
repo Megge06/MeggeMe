@@ -77,6 +77,14 @@ select {
   padding: 1rem;
 }
 
+#page-display {
+  color: var(--p-black);
+  background-color: var(--p-white);
+  padding: 0.25rem 0.75rem;
+  transform: rotate(1.5deg) skewX(-6deg);
+  clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
+}
+
 #guestbook-form {
   display: flex;
   flex-direction: column;
@@ -99,6 +107,7 @@ select {
 }
 
 button {
+  z-index: 1;
   padding: 0.5rem 1.25rem;
   color: var(--p-white);
   background-color: transparent;
@@ -173,11 +182,26 @@ img {
 .message {
   grid-column: 2;
   grid-row: 2;
-  padding: 0.75rem;
+  padding: 0.75rem 1.5rem;
   color: var(--p-white);
   background-color: var(--p-black);
   position: relative;
   z-index: 1;
+}
+
+.message-date {
+  z-index: 2;
+  display: block;
+  grid-column: 2;
+  grid-row: 3;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--p-black);
+  background-color: var(--p-white);
+  width: fit-content;
+  padding: 0.25rem;
+  margin-top: 0.125rem;
+  transform: rotate(-2deg) skewX(-6deg);
 }
 
 .individual-letter {
@@ -194,25 +218,26 @@ img {
   column-gap: 0rem;
   row-gap: 0rem;
   align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .entry:nth-child(4n + 1) .message {
-  transform: rotate(1.5deg) skewX(-6deg);
+  transform: rotate(0.4deg) skewX(-4deg);
   clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
 }
 
 .entry:nth-child(4n + 2) .message {
-  transform: rotate(-2deg) skewX(-9deg);
+  transform: rotate(-0.6deg) skewX(-5deg);
   clip-path: polygon(2% 0%, 97% 4%, 100% 94%, 0% 98%);
 }
 
 .entry:nth-child(4n + 3) .message {
-  transform: rotate(2.5deg) skewX(-4deg);
+  transform: rotate(0.6deg) skewX(-3deg);
   clip-path: polygon(1% 0%, 100% 2%, 96% 100%, 3% 95%);
 }
 
 .entry:nth-child(4n) .message {
-  transform: rotate(-1deg) skewX(-7deg);
+  transform: rotate(-0.4deg) skewX(-4deg);
   clip-path: polygon(0% 0%, 99% 5%, 98% 95%, 2% 100%);
 }
 
@@ -224,7 +249,7 @@ img {
   grid-column: 2;
   grid-row: 1;
   z-index: 2;
-  rotate: -5deg;
+  rotate: -2deg;
   width: fit-content;
   translate: 0 0.4rem;
 }
@@ -276,6 +301,8 @@ input {
   border: 2px solid var(--p-white);
   transform: rotate(-6deg) skewX(-6deg);
   box-shadow: 0 0 0 4px var(--p-black);
+
+  translate: 10% 20%;
 }
 
 .avatar {
@@ -315,4 +342,20 @@ input {
 
 .form-group {
   width: 100%;
+}
+
+#avatar-preview {
+  background-color: #959595;
+  border: 2px solid var(--p-white);
+  transform: rotate(-3deg) skewX(-6deg);
+  margin: 1rem;
+}
+
+#form-error {
+  color: var(--p-red);
+  border-left: 3px solid var(--p-red);
+  padding-left: 0.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  transform: skewX(-4deg);
 }

@@ -12,16 +12,19 @@ var (
 	rateMu      sync.Mutex
 )
 
-// Lock ip for 1 hour
-func rateLimit(ip string) bool {
+// Returns true if the IP is within the 1-hour cooldown window.
+func checkRateLimit(ip string) bool {
 	rateMu.Lock()
 	defer rateMu.Unlock()
 	last, exists := ratelimiter[ip]
-	if exists && time.Since(last) < time.Hour {
-		return true
-	}
+	return exists && time.Since(last) < time.Hour
+}
+
+// Records the IP as having just posted. Call only after a successful insert.
+func recordRateLimit(ip string) {
+	rateMu.Lock()
+	defer rateMu.Unlock()
 	ratelimiter[ip] = time.Now()
-	return false
 }
 
 // Deletes old entries into ratelimiter

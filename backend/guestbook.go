@@ -36,7 +36,7 @@ var allowedAvatars = map[string]bool{
 	"justine": true, "kawakami": true, "makoto": true, "mishima": true,
 	"munehisa": true, "ohya": true, "phantom": true, "ryuji": true,
 	"shinya": true, "sojiro": true, "takemi": true, "yoshida": true,
-	"yusuke": true, "yhosizawa": true,
+	"yusuke": true, "yoshizawa": true,
 }
 
 // Handles requests to the guestbook
@@ -107,8 +107,11 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Check rate limit
-		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
-		if rateLimit(ip) {
+		ip := r.Header.Get("X-Forwarded-For")
+		if ip == "" {
+			ip, _, _ = net.SplitHostPort(r.RemoteAddr)
+		}
+		if checkRateLimit(ip) {
 			http.Error(w, "rate limited", http.StatusTooManyRequests)
 			return
 		}
@@ -121,6 +124,8 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "insertion error", http.StatusInternalServerError)
 			return
 		}
+
+		recordRateLimit(ip)
 
 		w.WriteHeader(http.StatusCreated)
 	} else {
