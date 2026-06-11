@@ -3,8 +3,7 @@ services:
     build: .
     container_name: indieweb_site
     restart: always
-    ports:
-      - "80:80"
+    network_mode: host
     depends_on:
       - backend
   backend:
@@ -13,4 +12,6 @@ services:
       dockerfile: backend/Dockerfile
     volumes:
       - /home/pi/data:/data
+    ports:
+      - "127.0.0.1:8080:8080"
     restart: always

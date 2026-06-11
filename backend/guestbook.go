@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -108,7 +109,10 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Check rate limit
 		ip := r.Header.Get("X-Forwarded-For")
-		if ip == "" {
+		if ip != "" {
+			ip = strings.SplitN(ip, ",", 2)[0]
+			ip = strings.TrimSpace(ip)
+		} else {
 			ip, _, _ = net.SplitHostPort(r.RemoteAddr)
 		}
 		if checkRateLimit(ip) {

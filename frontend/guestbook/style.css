@@ -115,6 +115,7 @@ button {
   width: fit-content;
   position: relative;
   cursor: pointer;
+  transition: translate 100ms ease;
 
   filter: drop-shadow(2px 0 0 var(--p-white))
     drop-shadow(-2px 0 0 var(--p-white)) drop-shadow(0 2px 0 var(--p-white))
