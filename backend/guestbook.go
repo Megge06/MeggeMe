@@ -40,6 +40,25 @@ var allowedAvatars = map[string]bool{
 	"yusuke": true, "yoshizawa": true,
 }
 
+func rateLimitKey(r *http.Request) string {
+	if ip := strings.TrimSpace(r.Header.Get("X-Real-IP")); ip != "" {
+		return normalizeIP(ip)
+	}
+	host, _, _ := net.SplitHostPort(r.RemoteAddr)
+	return normalizeIP(host)
+}
+
+func normalizeIP(ip string) string {
+	parsed := net.ParseIP(ip)
+	if parsed == nil {
+		return ip
+	}
+	if v4 := parsed.To4(); v4 != nil {
+		return v4.String()
+	}
+	return parsed.Mask(net.CIDRMask(64, 128)).String() + "/64"
+}
+
 // Handles requests to the guestbook
 func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -80,6 +99,12 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 		// Put entries into json
 		json.NewEncoder(w).Encode(entries)
 	} else if r.Method == "POST" {
+		// Rate-limit before doing any work
+		if !allowRateLimit(rateLimitKey(r)) {
+			http.Error(w, "rate limited", http.StatusTooManyRequests)
+			return
+		}
+
 		// Inserting new Entries
 		userEntry := UserEntry{}
 		err := json.NewDecoder(r.Body).Decode(&userEntry)
@@ -107,19 +132,6 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		// Check rate limit
-		ip := r.Header.Get("X-Forwarded-For")
-		if ip != "" {
-			ip = strings.SplitN(ip, ",", 2)[0]
-			ip = strings.TrimSpace(ip)
-		} else {
-			ip, _, _ = net.SplitHostPort(r.RemoteAddr)
-		}
-		if checkRateLimit(ip) {
-			http.Error(w, "rate limited", http.StatusTooManyRequests)
-			return
-		}
-
 		// The actual insertion
 		_, err = d.db.Exec("INSERT INTO entries (name, message, date, avatar) VALUES (?, ?, ?, ?)",
 			userEntry.Name, userEntry.Message, time.Now(), userEntry.Avatar)
@@ -128,8 +140,6 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "insertion error", http.StatusInternalServerError)
 			return
 		}
-
-		recordRateLimit(ip)
 
 		w.WriteHeader(http.StatusCreated)
 	} else {
