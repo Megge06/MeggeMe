@@ -1,6 +1,6 @@
-# IndieWeb Site
+# MeggeMe
 
-Personal website featuring game-inspired themes and static page sections.
+Personal website featuring game-inspired pages.
 
 ## Features
 
