@@ -3,6 +3,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
   eleventyConfig.addPassthroughCopy({ "src/photos": "photos" });
   eleventyConfig.addPassthroughCopy({ "src/favicon": "favicon" });
+  eleventyConfig.addPassthroughCopy({ "src/script.js": "script.js" });
 
   eleventyConfig.addWatchTarget("src/css/");
   eleventyConfig.addWatchTarget("src/assets/");

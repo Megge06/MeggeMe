@@ -34,6 +34,19 @@ func main() {
 		log.Fatal(err)
 	}
 
+	//Initialize Blog Comments Table if non existent
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS blog_comments (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	post_slug TEXT NOT NULL,
+	name TEXT NOT NULL,
+	message TEXT NOT NULL,
+	date DATETIME NOT NULL
+	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	database := Database{db: db}
 
 	//Rate limit cleanup routine
@@ -41,6 +54,7 @@ func main() {
 
 	//Initialise handlers
 	http.HandleFunc("/api/guestbook", database.guestbookHandler)
+	http.HandleFunc("/api/comments", database.commentsHandler)
 
 	//Listen and serve through http.Server in background
 	server := &http.Server{

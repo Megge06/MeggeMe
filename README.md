@@ -29,29 +29,37 @@ frontend/           All frontend/static content
 ├── script.js       Home scripts
 └── reset.css       Global CSS reset
 
-backend/            Go backend (guestbook API)
+backend/            Go backend
 ├── Dockerfile
 ├── go.mod
 ├── go.sum
 ├── main.go         HTTP server, SQLite init, graceful shutdown
 ├── guestbook.go    Guestbook REST API (GET/POST /api/guestbook)
+├── comments.go     Blog comments REST API (GET/POST /api/comments)
 ├── middleware.go   CORS middleware
 └── ratelimit.go    IP-based rate limiting
 
-nginx.conf          Reverse proxy config (static files + /api/guestbook)
+nginx.conf          Reverse proxy config (static files + /api/)
 docker-compose.yaml Multi-service compose (nginx + Go backend)
 ```
 
 ## Backend
 
-The Go backend exposes a single REST endpoint:
+The Go backend exposes the following REST endpoints:
 
-| Method | Path                            | Description                       |
-|--------|---------------------------------|-----------------------------------|
-| `GET`  | `/api/guestbook?page=N&limit=N` | Fetch paginated guestbook entries |
-| `POST` | `/api/guestbook`                | Submit a new guestbook entry      |
+| Method | Path                            | Description                        |
+| ------ | ------------------------------- | ---------------------------------- |
+| `GET`  | `/api/guestbook?page=N&limit=N` | Fetch paginated guestbook entries  |
+| `POST` | `/api/guestbook`                | Submit a new guestbook entry       |
+| `GET`  | `/api/comments?post=slug`       | Fetch all comments for a blog post |
+| `POST` | `/api/comments`                 | Submit a new blog post comment     |
 
-Entries are stored in a SQLite database at `/data/guestbook.db`. Each entry includes a name, message, date, and an avatar chosen from a whitelist of Persona characters.
+Data is stored in a SQLite database at `/data/guestbook.db` in two tables:
+
+- `entries` — Guestbook entries (name, message, date, avatar)
+- `blog_comments` — Blog comments (name, message, date, post slug)
+
+All write endpoints share the same IP-based rate limiter (1 request per hour per IP).
 
 ## Development
 
@@ -104,4 +112,4 @@ docker compose down
 
 ## Deployment
 
-Self-hosted on a Raspberry Pi. Docker Compose runs two services: a nginx container serving static files and proxying `/api/guestbook` to the Go backend, which persists guestbook data to `/home/pi/data` on the host.
+Self-hosted on a Raspberry Pi. Docker Compose runs two services: a nginx container serving static files and proxying all `/api/` requests to the Go backend, which persists data to `/home/pi/data` on the host.
