@@ -14,3 +14,4 @@ frontend/photos/*
 !frontend/photos/src/
 node_modules/
 backend/backend
+backend/indieweb-backend
