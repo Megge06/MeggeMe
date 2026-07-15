@@ -115,10 +115,13 @@ p img {
   position: absolute;
   width: 90%;
   height: auto;
-  max-height: 40vh;
+  max-height: 35vh;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
   cursor: var(--cursor-text);
 }
 

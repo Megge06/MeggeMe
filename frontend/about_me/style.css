@@ -76,6 +76,7 @@ main {
   z-index: 0;
   cursor: pointer;
 }
+
 .dialogue-box img.dialogue {
   display: block;
   width: 100%;
@@ -88,10 +89,10 @@ main {
 .dialogue-text {
   position: absolute;
   top: 10%;
-  left: 14%;
-  right: 14%;
+  left: 10%;
+  right: 10%;
   color: var(--text);
-  padding: 10px 12px;
+  padding: 10px;
   font-size: clamp(1rem, 1.5vw + 0.5rem, 2rem);
   line-height: 1.2;
   text-align: left;
@@ -214,12 +215,12 @@ main {
     content: url("../assets/about_me/dialogue_box_vertical.png");
   }
   .character {
-    width: clamp(10rem, 55vw, 22rem);
-    height: clamp(10rem, 55vw, 22rem);
+    width: clamp(15rem, 75vw, 32rem);
+    height: clamp(15rem, 75vw, 32rem);
   }
   .dialogue-text {
-    left: 12%;
-    right: 12%;
+    left: 10%;
+    right: 10%;
   }
 }
 
@@ -227,7 +228,11 @@ main {
   .back-button img {
     width: 2.5rem;
   }
+  .dialogue-box {
+    width: min(90%, 1600px);
+  }
   .dialogue-text {
     padding: 6px 8px;
+    font-size: clamp(1.5rem, 1.5vw + 0.5rem, 2.5rem);
   }
 }
