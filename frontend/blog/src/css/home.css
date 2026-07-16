@@ -67,6 +67,11 @@ p img {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .ame-window {
@@ -186,6 +191,9 @@ h2 {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 50dvh;
+
+  flex: 1;
+  min-height: 0;
 }
 
 .post-list-button {
