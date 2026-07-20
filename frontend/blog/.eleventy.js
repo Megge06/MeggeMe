@@ -11,16 +11,12 @@ module.exports = function (eleventyConfig) {
   });
 
   // Custom filters to generate the Atom feed natively.
-  // This bypasses the global HTML Base Plugin to keep your asset paths intact.
-
-  // 1. Format dates to ISO-8601 / RFC3339
   eleventyConfig.addFilter("dateToRfc3339", function (date) {
     if (!date) return new Date().toISOString();
     const d = new Date(date);
     return isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
   });
 
-  // 2. Find the date of the newest post in your collection
   eleventyConfig.addFilter(
     "getNewestCollectionItemDate",
     function (collection) {
@@ -34,7 +30,6 @@ module.exports = function (eleventyConfig) {
     },
   );
 
-  // 3. Convert relative asset/link paths inside post markdown to absolute URLs for feed readers
   eleventyConfig.addFilter(
     "htmlToAbsoluteUrls",
     function (htmlContent, siteUrl) {
@@ -43,7 +38,6 @@ module.exports = function (eleventyConfig) {
         ? siteUrl.slice(0, -1)
         : siteUrl;
 
-      // Prefix root-relative paths like src="/..." or href="/..." with your domain URL
       return htmlContent.replace(
         /(src|href)="\/([^"]+)"/g,
         (match, attr, path) => {

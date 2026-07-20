@@ -10,31 +10,52 @@ title: "Blog"
   />
 </a>
 
-<div class="post-window" id="post-window">
-  <h1>{{ title }}</h1>
+<div class="post-window h-feed" id="post-window">
+  <h1 class="p-name">{{ title }}</h1>
+
   <p>
     Hello and welcome to my blog! If you want to know about my random thoughts
-    and such, keep an eye on this page. I probably just ramble about random
-    stuff I did in my life and found interesting, so bear with me.
+    and such, keep an eye on this page.
   </p>
+
   <div class="post-list">
     <ul>
       {% for post in collections.posts %}
-      <li>
+
+      <li class="h-entry">
         <img
           src="{{ '/assets/images/icon_cho.png' | url }}"
           alt="Author icon"
         />
         <p>
+          <span class="p-author h-card" style="display: none">
+            <a class="u-url p-name" href="https://megge.me/"
+              >{{ post.data.author }}</a
+            >
+          </span>
+
           {{ post.data.author }}
+
           <a
-            href="#"
+            class="u-url p-name"
+            href="{{ post.url | url }}"
             onclick="loadPost('{{ post.url | url }}', event); return false;"
-            >{{ post.data.title }}</a
           >
+            {{ post.data.title }}
+          </a>
         </p>
-        <p class="post-description">{{post.data.description}}</p>
-        <p class="post-date">{{post.data.date}}</p>
+
+        <p class="post-description p-summary">{{ post.data.description }}</p>
+
+        <p class="post-date">
+          <time
+            class="dt-published"
+            datetime="{{ post.data.date | dateToRfc3339 }}"
+          >
+            {{ post.data.date }}
+          </time>
+        </p>
+
         <p class="interactions">
           <img src="{{ '/assets/images/icon_star.png' | url }}" alt="Star" />
           <img
@@ -48,7 +69,6 @@ title: "Blog"
     </ul>
   </div>
 </div>
-
 <div class="ame-window" id="ame-window">
   <img
     class="ame"
@@ -61,4 +81,3 @@ title: "Blog"
   window.AME_ASSETS_PATH = "{{ '/assets/images/ame/' | url }}";
 </script>
 <script src="{{ '/script.js' | url }}"></script>
-
