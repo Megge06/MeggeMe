@@ -1,10 +1,13 @@
 name: Deploy to Raspberry Pi
 
-# Run on main branch for security
+# Run on main branch push OR on repository dispatch (for content updates)
 on:
   push:
     branches:
       - main
+  repository_dispatch:
+    types: [content_update]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -21,10 +24,13 @@ jobs:
       # Enter the pi and deploy
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.5
+        env:
+          CONTENT_PAT: ${{ secrets.CONTENT_PAT }}
         with:
           host: ${{ secrets.PI_IP }}
           username: ${{ secrets.PI_USER }}
           key: ${{ secrets.PI_SSH_KEY }}
+          envs: CONTENT_PAT
           script: |
             export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -33,6 +39,34 @@ jobs:
 
             echo "Pulling latest code from main..."
             git pull origin main
+
+            echo "Fetching content repository..."
+            CONTENT_DIR="/tmp/MeggeMe-Content"
+            rm -rf "$CONTENT_DIR"
+
+            # Clone the content repository
+            if [ -n "$CONTENT_PAT" ]; then
+              git clone "https://x-access-token:${CONTENT_PAT}@github.com/Megge06/MeggeMe-Content.git" "$CONTENT_DIR"
+            else
+              git clone "https://github.com/Megge06/MeggeMe-Content.git" "$CONTENT_DIR"
+            fi
+
+            echo "Ensuring target directories exist..."
+            mkdir -p frontend/blog/src/assets/blog_images
+            mkdir -p frontend/blog/src/blog
+            mkdir -p frontend/photos/src/photos
+
+            echo "Copying blog images..."
+            cp -rf "$CONTENT_DIR"/blog/blog_images/. frontend/blog/src/assets/blog_images/
+
+            echo "Copying blog posts..."
+            cp -rf "$CONTENT_DIR"/blog/posts/. frontend/blog/src/blog/
+
+            echo "Copying photos..."
+            cp -rf "$CONTENT_DIR"/photos/. frontend/photos/src/photos/
+
+            echo "Cleaning up temporary content directory..."
+            rm -rf "$CONTENT_DIR"
 
             echo "Rebuilding and restarting Docker container..."
             docker compose up -d --build
