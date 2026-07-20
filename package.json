@@ -2,7 +2,10 @@
   "name": "indieweb",
   "private": true,
   "version": "1.0.0",
-  "workspaces": ["frontend/blog", "frontend/photos"],
+  "workspaces": [
+    "frontend/blog",
+    "frontend/photos"
+  ],
   "engines": {
     "node": ">=18"
   },

@@ -1,0 +1,30 @@
+---json
+{
+  "permalink": "feed.xml",
+  "eleventyExcludeFromCollections": true
+}
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>MeggeMe Blog</title>
+  <subtitle>Personal website featuring game-inspired pages.</subtitle>
+  <link href="https://megge.me/blog/feed.xml" rel="self" />
+  <link href="https://megge.me/blog/" />
+  <updated>{{ collections.posts | getNewestCollectionItemDate }}</updated>
+  <id>https://megge.me/blog/</id>
+  <author>
+    <name>Megge</name>
+  </author>
+  {%- for post in collections.posts %}
+  {%- if loop.index0 < 10 %}
+  {%- set absolutePostUrl = "https://megge.me" + post.url %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absolutePostUrl }}" />
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <content type="html"><![CDATA[{{ post.templateContent | htmlToAbsoluteUrls("https://megge.me") | safe }}]]></content>
+  </entry>
+  {%- endif %}
+  {%- endfor %}
+</feed>
