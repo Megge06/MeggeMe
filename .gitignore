@@ -1,17 +1,113 @@
-.vscode/
-data/
-*.db
+# ==============================================================================
+# 1. Environment Variables & Secrets (CRITICAL)
+# ==============================================================================
+.env
+.env.local
+.env.*.local
+*.env
+config.json
 
+# ==============================================================================
+# 2. Operating System Files
+# ==============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux / Vim / Backup files
+*~
+*.swp
+*.swo
+
+# ==============================================================================
+# 3. IDEs and Code Editors
+# ==============================================================================
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/tasks.json
+
+# JetBrains (GoLand, WebStorm, IntelliJ, etc.)
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ==============================================================================
+# 4. Node.js & Dependency Cache
+# ==============================================================================
+node_modules/
+/jspm_packages/
+.npm
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================================================================
+# 5. Frontends (Eleventy / 11ty)
+# ==============================================================================
 frontend/blog/*
 !frontend/blog/.eleventy.js
 !frontend/blog/package.json
 !frontend/blog/package-lock.json
 !frontend/blog/src/
+
 frontend/photos/*
 !frontend/photos/.eleventy.js
 !frontend/photos/package.json
 !frontend/photos/package-lock.json
 !frontend/photos/src/
-node_modules/
+
+# Eleventy cache
+.cache/
+
+# ==============================================================================
+# 6. Backend (Go Compilation Artifacts)
+# ==============================================================================
+# Specific binary targets
 backend/backend
 backend/indieweb-backend
+
+# General compiled binaries and libraries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+backend/bin/
+
+# Go Test outputs
+*.test
+*.out
+c.out
+
+# ==============================================================================
+# 7. Databases & SQLite State
+# ==============================================================================
+data/
+*.db
+
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# ==============================================================================
+# 8. Docker (Local development overrides)
+# ==============================================================================
+docker-compose.override.yml

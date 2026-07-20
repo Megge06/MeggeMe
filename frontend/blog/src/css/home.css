@@ -424,3 +424,71 @@ h2 {
   font-size: 0.9rem;
   font-weight: bold;
 }
+
+.wm-interactions-box {
+  background-color: #fff8ff;
+  border: 3px solid #ffb2ef;
+  box-shadow: 0 0 0 2px #5230d0;
+  padding: 12px;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.wm-interaction-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.wm-interaction-row:last-child {
+  margin-bottom: 0;
+}
+
+.wm-interaction-label {
+  color: #5230d0;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.wm-mini-avatar {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #5230d0;
+  background-color: #fff;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transition: transform 0.1s ease;
+}
+
+.wm-mini-avatar:hover {
+  transform: translateY(-2px);
+  border-color: #ffb2ef;
+}
+
+.comment-card.webmention-card {
+  border-color: #c49eff;
+}
+
+.comment-avatar-mini {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #5230d0;
+  margin-right: 8px;
+  vertical-align: middle;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.comment-webmention-link {
+  font-size: 0.75rem;
+  color: #5230d0;
+  text-decoration: none;
+}
+
+.comment-webmention-link:hover {
+  text-decoration: underline;
+  color: #ffb2ef;
+}

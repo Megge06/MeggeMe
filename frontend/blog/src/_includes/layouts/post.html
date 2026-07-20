@@ -1,9 +1,34 @@
-<div class="post-header">
-  <img src="{{ '/assets/images/icon_cho.png' | url }}" alt="" />
-  {{ author }} {{ title }}
-</div>
-<div class="post-content">{{ content | safe }}</div>
-<a class="post-list-button" href="#" onclick="loadList()">
-  <img src="{{ '/assets/images/Previous.png' | url }}" alt="" />
-  Post List</a
->
+<script>
+  if (window.self === window.top) {
+    window.location.href =
+      "/blog/?post=" + encodeURIComponent(window.location.pathname);
+  }
+</script>
+
+<article class="h-entry">
+  <div class="post-header">
+    <img src="{{ '/assets/images/icon_cho.png' | url }}" alt="" />
+
+    <span class="p-author h-card" style="display: none">
+      <a class="u-url p-name" href="https://megge.me/">{{ author }}</a>
+    </span>
+
+    {{ author }}
+
+    <span class="p-name">{{ title }}</span>
+  </div>
+
+  <div class="post-content e-content">{{ content | safe }}</div>
+
+  <a class="u-url" href="{{ page.url }}" style="display: none">Permalink</a>
+  {% if date %}
+  <time class="dt-published" datetime="{{ date }}" style="display: none"
+    >{{ date }}</time
+  >
+  {% endif %}
+
+  <a class="post-list-button" href="#" onclick="loadList()">
+    <img src="{{ '/assets/images/Previous.png' | url }}" alt="" />
+    Post List
+  </a>
+</article>
