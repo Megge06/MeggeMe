@@ -10,7 +10,7 @@ title: "Blog"
   />
 </a>
 
-<div class="post-window h-feed" id="post-window">
+<main class="post-window h-feed" id="post-window" aria-busy="false">
   <h1 class="p-name">{{ title }}</h1>
 
   <p>
@@ -68,11 +68,12 @@ title: "Blog"
       {% endfor %}
     </ul>
   </div>
-</div>
+</main>
 <div class="ame-window" id="ame-window">
   <img
     class="ame"
     src="{{ '/assets/images/ame/neutral.png' | url }}"
+    alt="Ame"
     onclick="setAmeExpressionTemp('smiling')"
   />
 </div>
