@@ -13,9 +13,9 @@
       <a class="u-url p-name" href="https://megge.me/">{{ author }}</a>
     </span>
 
-    {{ author }}
+    <span class="post-author">{{ author }}</span>
 
-    <span class="p-name">{{ title }}</span>
+    <h1 class="p-name post-title">{{ title }}</h1>
   </div>
 
   <div class="post-content e-content">{{ content | safe }}</div>
@@ -27,7 +27,14 @@
   >
   {% endif %}
 
-  <a class="post-list-button" href="#" onclick="loadList()">
+  <a
+    class="post-list-button"
+    href="{{ '/' | url }}"
+    onclick="
+      loadList(event);
+      return false;
+    "
+  >
     <img src="{{ '/assets/images/Previous.png' | url }}" alt="" />
     Post List
   </a>

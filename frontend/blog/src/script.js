@@ -1,11 +1,16 @@
 const win = document.getElementById("post-window");
 const ame = document.getElementById("ame-window");
-const img = ame.querySelector("img.ame");
+const img = ame?.querySelector("img.ame");
 const originalListHTML = win.innerHTML;
+const listDocumentTitle = document.title;
+const compactLayoutQuery = window.matchMedia(
+  "(max-width: 760px), (max-height: 600px) and (pointer: coarse)",
+);
+let activePostRequest;
 
 function enableDragging(el) {
   if (!el) return;
-  if (!window.matchMedia("(min-aspect-ratio: 1/1)").matches) return;
+  if (compactLayoutQuery.matches) return;
 
   let dragging = false;
   let startX = 0,
@@ -77,6 +82,12 @@ function enableDragging(el) {
 enableDragging(win);
 enableDragging(ame);
 
+compactLayoutQuery.addEventListener("change", (event) => {
+  if (!event.matches) return;
+  win.style.removeProperty("transform");
+  ame?.style.removeProperty("transform");
+});
+
 let zIndexCounter = 10;
 
 function bringToFront(element) {
@@ -92,35 +103,60 @@ ame.addEventListener("touchstart", () => bringToFront(ame));
 
 async function loadPost(url, event, pushState = true) {
   if (event) event.preventDefault();
+  activePostRequest?.abort();
+  const request = new AbortController();
+  activePostRequest = request;
+  win.setAttribute("aria-busy", "true");
+  win.querySelector(".load-error")?.remove();
+
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { signal: request.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
     const text = await res.text();
     const doc = new DOMParser().parseFromString(text, "text/html");
     const header = doc.querySelector(".post-header");
     const content = doc.querySelector(".post-content");
     const button = doc.querySelector(".post-list-button");
+    if (!header || !content) throw new Error("Invalid post response");
+
     win.innerHTML = "";
-    if (header) win.appendChild(document.adoptNode(header));
-    if (content) {
-      const adoptedContent = document.adoptNode(content);
-      win.appendChild(adoptedContent);
+    const adoptedHeader = document.adoptNode(header);
+    const adoptedContent = document.adoptNode(content);
+    win.appendChild(adoptedHeader);
+    win.appendChild(adoptedContent);
 
-      const slug = url.replace(/\/$/, "").split("/").pop() || "default";
-      const commentsDiv = document.createElement("div");
-      commentsDiv.className = "comments-section";
-      adoptedContent.appendChild(commentsDiv);
+    const slug = url.replace(/\/$/, "").split("/").pop() || "default";
+    const commentsDiv = document.createElement("div");
+    commentsDiv.className = "comments-section";
+    adoptedContent.appendChild(commentsDiv);
 
-      loadComments(commentsDiv, slug, url);
-    }
+    loadComments(commentsDiv, slug, url);
     if (button) win.appendChild(document.adoptNode(button));
+
+    const postTitle = adoptedHeader.querySelector(".post-title");
+    if (postTitle) {
+      document.title = `${postTitle.textContent.trim()} - Megge's Blog`;
+      postTitle.tabIndex = -1;
+      postTitle.focus({ preventScroll: true });
+    }
 
     if (pushState) {
       history.pushState({ type: "post", url: url }, "", url);
     }
   } catch (err) {
-    win.innerHTML =
-      '<p>The blog post could not be loaded. <a onClick="loadList();">Return to Post List.</a></p>';
+    if (err.name === "AbortError") return;
+
+    const errorMessage = document.createElement("p");
+    errorMessage.className = "load-error";
+    errorMessage.setAttribute("role", "alert");
+    errorMessage.textContent = "The blog post could not be loaded.";
+    win.prepend(errorMessage);
     console.error("Failed to load post:", err);
+  } finally {
+    if (activePostRequest === request) {
+      win.setAttribute("aria-busy", "false");
+    }
   }
 }
 
@@ -404,10 +440,20 @@ async function fetchAndRenderComments(listDiv, slug, url) {
   });
 }
 
-function loadList(pushState = true) {
+function loadList(event = null, pushState = true) {
+  if (event) event.preventDefault();
+  activePostRequest?.abort();
+  activePostRequest = undefined;
+  win.setAttribute("aria-busy", "false");
   win.innerHTML = originalListHTML;
+  document.title = listDocumentTitle;
   if (pushState) {
     history.pushState({ type: "list" }, "", "/blog/");
+  }
+  const heading = win.querySelector("h1");
+  if (heading) {
+    heading.tabIndex = -1;
+    heading.focus({ preventScroll: true });
   }
 }
 
@@ -424,6 +470,7 @@ function setAmeExpressionTemp(expression, length = 1500) {
 }
 
 function blink() {
+  if (!img) return;
   if (img.id == "ame-temp-expression") return;
   img.src = `${window.AME_ASSETS_PATH}blink.png`;
   setTimeout(() => {
@@ -437,15 +484,17 @@ function randomExpression() {
   setAmeExpressionTemp(expr, 5000);
 }
 
-setInterval(randomExpression, 20000);
-setInterval(blink, 3000 + Math.random() * 2000);
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  setInterval(randomExpression, 20000);
+  setInterval(blink, 3000 + Math.random() * 2000);
+}
 
 // Handle back/forward browser buttons
 window.addEventListener("popstate", (e) => {
   if (e.state && e.state.type === "post") {
     loadPost(e.state.url, null, false);
   } else {
-    loadList(false);
+    loadList(null, false);
   }
 });
 
