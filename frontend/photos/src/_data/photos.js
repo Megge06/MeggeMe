@@ -13,6 +13,7 @@ module.exports = function () {
 
   return files
     .filter((file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
+    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }))
     .map((file) => ({
       filename: file,
       title: makeTitle(file),
