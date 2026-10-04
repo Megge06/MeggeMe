@@ -33,6 +33,7 @@ jobs:
           envs: CONTENT_PAT
           script: |
             export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            set -e
 
             echo "Navigating to repository..."
             cd /var/www/html || exit 1
