@@ -14,7 +14,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy": "^3.1.7",
     "concurrently": "^10.0.6"
   },
   "devDependencies": {
