@@ -20,12 +20,12 @@ title: "Photos"
   {% for photo in photos %}
   <button
     class="photo-div"
-    onclick="openLightbox('{{ photo.url | url }}', '{{ photo.title }}')"
+    onclick="const photo = this.querySelector('img'); openLightbox(photo.src, photo.alt)"
   >
     <img
       class="photo"
-      src="{{ photo.url | url }}"
-      alt="{{ photo.title }}"
+      src="{{ photo.url | url | escape }}"
+      alt="{{ photo.title | escape }}"
       loading="lazy"
     />
   </button>

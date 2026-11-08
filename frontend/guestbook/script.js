@@ -123,16 +123,22 @@ document
   .addEventListener("click", () => changeAvatar("up"));
 
 let currentPage = 1;
+let latestEntriesRequest = 0;
 
 async function loadEntries(page) {
+  const request = ++latestEntriesRequest;
   try {
     const response = await fetch(`/api/guestbook?page=${page}&limit=10`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const entries = await response.json();
+    if (request !== latestEntriesRequest) return;
+
     renderEntries(entries);
+    currentPage = page;
     document.querySelector("#page-display").textContent = `Page ${page}`;
     document.querySelector("#prev").disabled = page <= 1;
-    document.querySelector("#next").disabled = entries.length < 10;
+    document.querySelector("#next").disabled =
+      response.headers.get("X-Has-More") !== "true";
   } catch (err) {
     console.error("Failed to load entries:", err);
   }
@@ -185,14 +191,12 @@ function renderEntries(entries) {
 
 document.querySelector("#prev").addEventListener("click", () => {
   if (currentPage > 1) {
-    currentPage--;
-    loadEntries(currentPage);
+    loadEntries(currentPage - 1);
   }
 });
 
 document.querySelector("#next").addEventListener("click", () => {
-  currentPage++;
-  loadEntries(currentPage);
+  loadEntries(currentPage + 1);
 });
 
 setAvatarSelection("phantom");
@@ -225,8 +229,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
       document.querySelector("form").reset();
       currentAvatar = 0;
       setAvatarSelection("phantom");
-      currentPage = 1;
-      loadEntries(currentPage);
+      loadEntries(1);
     } else {
       const text = await response.text();
       const errorEl = document.querySelector("#form-error");

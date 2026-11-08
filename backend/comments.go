@@ -50,13 +50,8 @@ func (d *Database) commentsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		_ = json.NewEncoder(w).Encode(comments)
 	case http.MethodPost:
-		if !allowRateLimit(rateLimitKey(r)) {
-			http.Error(w, "rate limited", http.StatusTooManyRequests)
-			return
-		}
-
 		var uc UserBlogComment
-		err := json.NewDecoder(r.Body).Decode(&uc)
+		err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&uc)
 		if err != nil {
 			http.Error(w, "decoding error", http.StatusBadRequest)
 			return
@@ -67,8 +62,13 @@ func (d *Database) commentsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if len(uc.PostSlug) > 100 || len(uc.Name) > 50 || len(uc.Message) > 1000 {
+		if len(uc.PostSlug) > 100 || formTextLength(uc.Name) > 50 || formTextLength(uc.Message) > 1000 {
 			http.Error(w, "input too long", http.StatusBadRequest)
+			return
+		}
+
+		if !allowRateLimit(rateLimitKey(r)) {
+			http.Error(w, "rate limited", http.StatusTooManyRequests)
 			return
 		}
 

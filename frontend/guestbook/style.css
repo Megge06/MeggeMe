@@ -13,6 +13,7 @@
   font-style: normal;
 }
 
+.back-button:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
@@ -20,6 +21,7 @@ textarea:focus-visible {
   outline-offset: 4px;
 }
 
+.back-button:focus-visible,
 button:focus-visible {
   translate: 2px 2px;
 }
@@ -68,6 +70,12 @@ select {
   flex-direction: column;
   align-items: center;
   padding-bottom: 2rem;
+}
+
+.back-button {
+  align-self: flex-start;
+  margin: 1rem;
+  text-decoration: none;
 }
 
 .bottom-container {
@@ -235,7 +243,8 @@ select {
   width: fit-content;
 }
 
-button {
+button,
+.back-button {
   z-index: 1;
   padding: 0.5rem 1.25rem;
   color: var(--p-white);
@@ -251,7 +260,8 @@ button {
     drop-shadow(0 -2px 0 var(--p-white));
 }
 
-button::before {
+button::before,
+.back-button::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -259,14 +269,17 @@ button::before {
   z-index: -1;
 }
 
-button:hover {
+button:hover,
+.back-button:hover {
   translate: 2px 2px;
 }
 
-button:nth-of-type(4n + 1) {
+button:nth-of-type(4n + 1),
+.back-button {
   transform: rotate(1.5deg) skewX(-6deg);
 }
-button:nth-of-type(4n + 1)::before {
+button:nth-of-type(4n + 1)::before,
+.back-button::before {
   clip-path: polygon(0% 3%, 100% 0%, 98% 97%, 1% 100%);
 }
 

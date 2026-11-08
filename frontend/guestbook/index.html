@@ -51,6 +51,7 @@
   </head>
   <body>
     <main id="guestbook">
+      <a href="/" class="back-button" aria-label="Back to home">← Back</a>
       <img
         id="logo"
         src="../assets/guestbook/logo.webp"
@@ -62,11 +63,11 @@
       <section id="entries" aria-label="Guestbook entries"></section>
 
       <nav id="pagination" aria-label="Pagination">
-        <button id="prev">Previous Page</button>
+        <button id="prev" disabled>Previous Page</button>
         <span id="page-display" aria-live="polite" aria-atomic="true"
           >Page 1</span
         >
-        <button id="next">Next Page</button>
+        <button id="next" disabled>Next Page</button>
       </nav>
 
       <div class="bottom-container">

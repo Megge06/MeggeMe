@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf16"
 )
 
 // Struct for Guestbook entries in db
@@ -59,6 +60,15 @@ func normalizeIP(ip string) string {
 	return parsed.Mask(net.CIDRMask(64, 128)).String() + "/64"
 }
 
+// Form maxlength counts UTF-16 code units.
+func formTextLength(value string) int {
+	length := 0
+	for _, r := range value {
+		length += utf16.RuneLen(r)
+	}
+	return length
+}
+
 // Handles requests to the guestbook
 func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -80,7 +90,7 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 		offset := (page - 1) * limit
 
 		// Get all entries
-		rows, err := d.db.Query("SELECT name, message, date, avatar FROM entries ORDER BY date DESC LIMIT ? OFFSET ?", limit, offset)
+		rows, err := d.db.Query("SELECT name, message, date, avatar FROM entries ORDER BY date DESC, id DESC LIMIT ? OFFSET ?", limit+1, offset)
 		if err != nil {
 			http.Error(w, "database error", http.StatusInternalServerError)
 			return
@@ -97,18 +107,20 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			entries = append(entries, e)
 		}
-		// Put entries into json
-		_ = json.NewEncoder(w).Encode(entries)
-	case http.MethodPost:
-		// Rate-limit before doing any work
-		if !allowRateLimit(rateLimitKey(r)) {
-			http.Error(w, "rate limited", http.StatusTooManyRequests)
+		if err := rows.Err(); err != nil {
+			http.Error(w, "database error", http.StatusInternalServerError)
 			return
 		}
-
+		hasMore := len(entries) > limit
+		if hasMore {
+			entries = entries[:limit]
+		}
+		w.Header().Set("X-Has-More", strconv.FormatBool(hasMore))
+		_ = json.NewEncoder(w).Encode(entries)
+	case http.MethodPost:
 		// Inserting new Entries
 		userEntry := UserEntry{}
-		err := json.NewDecoder(r.Body).Decode(&userEntry)
+		err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20)).Decode(&userEntry)
 		if err != nil {
 			http.Error(w, "decoding error", http.StatusBadRequest)
 			return
@@ -118,7 +130,7 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "input error", http.StatusBadRequest)
 			return
 		}
-		if len(userEntry.Name) > 50 || len(userEntry.Message) > 1000 {
+		if formTextLength(userEntry.Name) > 50 || formTextLength(userEntry.Message) > 1000 {
 			http.Error(w, "input too long", http.StatusBadRequest)
 			return
 		}
@@ -130,6 +142,11 @@ func (d *Database) guestbookHandler(w http.ResponseWriter, r *http.Request) {
 
 		if !allowedAvatars[userEntry.Avatar] {
 			http.Error(w, "invalid avatar selection", http.StatusBadRequest)
+			return
+		}
+
+		if !allowRateLimit(rateLimitKey(r)) {
+			http.Error(w, "rate limited", http.StatusTooManyRequests)
 			return
 		}
 
