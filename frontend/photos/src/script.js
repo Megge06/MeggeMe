@@ -28,17 +28,6 @@ window.openLightbox = function openLightbox(url, alt) {
   const lightboxImg = document.getElementById("lightbox-img");
   lightboxImg.src = url;
   lightboxImg.alt = alt;
-  lightbox.style.display = "flex";
-  document.body.style.overflow = "hidden";
+  lightbox.showModal();
 };
-
-window.closeLightbox = function closeLightbox() {
-  const lightbox = document.getElementById("lightbox");
-  lightbox.style.display = "none";
-  document.body.style.overflow = "auto";
-};
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") window.closeLightbox();
-});
 

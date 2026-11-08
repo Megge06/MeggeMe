@@ -283,6 +283,25 @@ body.splash-done .bg-splash {
   }
 }
 
+@media (orientation: landscape) and (max-height: 540px) {
+  .buttons {
+    min-height: 100dvh;
+    gap: clamp(0px, 2dvh, 12px);
+  }
+
+  .btn {
+    margin-top: 0;
+    font-size: clamp(1.25rem, 9dvh, 3.5rem);
+    line-height: 1.25;
+  }
+
+  .triangle-indicator {
+    --triangle-width: 10rem;
+    --triangle-height: 3rem;
+    --top: 42;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn {
     animation: none;

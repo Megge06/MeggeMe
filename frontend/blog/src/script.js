@@ -4,7 +4,7 @@ const img = ame?.querySelector("img.ame");
 const originalListHTML = win.innerHTML;
 const listDocumentTitle = document.title;
 const compactLayoutQuery = window.matchMedia(
-  "(max-width: 760px), (max-height: 600px) and (pointer: coarse)",
+  "(max-width: 760px), (orientation: landscape) and (max-height: 600px)",
 );
 let activePostRequest;
 
@@ -133,6 +133,7 @@ async function loadPost(url, event, pushState = true) {
 
     loadComments(commentsDiv, slug, url);
     if (button) win.appendChild(document.adoptNode(button));
+    win.scrollTop = 0;
 
     const postTitle = adoptedHeader.querySelector(".post-title");
     if (postTitle) {
@@ -446,6 +447,7 @@ function loadList(event = null, pushState = true) {
   activePostRequest = undefined;
   win.setAttribute("aria-busy", "false");
   win.innerHTML = originalListHTML;
+  win.scrollTop = 0;
   document.title = listDocumentTitle;
   if (pushState) {
     history.pushState({ type: "list" }, "", "/blog/");

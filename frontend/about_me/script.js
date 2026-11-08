@@ -89,7 +89,6 @@ function handleDialogueClick() {
   }
 }
 dialogueBox.addEventListener("click", handleDialogueClick);
-dialogueText.addEventListener("click", handleDialogueClick);
 
 function changeImage(text) {
   for (const [tag, filename] of Object.entries(emotionMap)) {

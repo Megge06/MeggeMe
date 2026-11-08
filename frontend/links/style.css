@@ -188,3 +188,30 @@ body {
 .webring a:hover {
   color: white;
 }
+
+@media (orientation: landscape) and (max-height: 540px) {
+  .content-wrapper {
+    box-sizing: border-box;
+    min-height: 100dvh;
+    padding: 8px 0;
+  }
+
+  .minecraft-logo {
+    display: block;
+    width: min(360px, 72vw, 92dvh);
+    margin-block: -1.25rem;
+  }
+
+  .button-container {
+    width: min(440px, 90vw);
+    margin: 4px auto;
+  }
+
+  .button-container img {
+    height: 40px;
+  }
+
+  .webring {
+    margin-top: 8px;
+  }
+}

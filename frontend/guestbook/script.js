@@ -18,7 +18,6 @@ function namesToLetters() {
       wordSpan.id = `name-${nameIndex}-word-${wordIndex}`;
 
       wordSpan.style.display = "inline-block";
-      wordSpan.style.whiteSpace = "nowrap";
 
       const letters = word.split("");
 

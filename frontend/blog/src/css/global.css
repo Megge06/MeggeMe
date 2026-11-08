@@ -84,7 +84,7 @@ a {
   image-rendering: pixelated;
 }
 
-@media (max-width: 760px), (max-height: 600px) and (pointer: coarse) {
+@media (max-width: 760px), (orientation: landscape) and (max-height: 600px) {
   .sidebar {
     display: none;
   }

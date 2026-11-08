@@ -31,124 +31,25 @@ html {
 body {
   background:
     radial-gradient(
-      ellipse 70% 500% at center,
-      white 0%,
-      white 30%,
-      transparent 70%
-    ),
-    linear-gradient(
+      ellipse at 50% 40%,
+      transparent 45%,
+      rgb(53 108 138 / 9%)
+    ) fixed,
+    repeating-linear-gradient(
       to bottom,
-      #ffffff 0%,
-      #ffffff 50%,
-      #eeeeee 50%,
-      #eeeeee 100%
-    );
-  background-size:
-    100% 100%,
-    100% 8px;
+      transparent 0 3px,
+      rgb(59 103 123 / 4%) 3px 4px
+    ),
+    #f8fbfc;
   cursor: var(--cursor) !important;
   margin: 0;
   min-height: 100vh;
   font:
     16px "rodin",
     sans-serif;
-  color: #a8a8a8;
+  color: #52646d;
   position: relative;
   overflow-x: hidden;
-  text-shadow:
-    1px 0px 2px rgba(0, 0, 0, 0.2),
-    -1px 0px 1px rgba(255, 0, 0, 0.1);
-  animation: crt-flicker 0.15s infinite;
-}
-
-body::before {
-  content: "";
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9998;
-  background: linear-gradient(
-    to bottom,
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.1) 50%
-  );
-  background-size: 100% 4px;
-}
-
-body::after {
-  content: "";
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.06),
-    rgba(0, 255, 0, 0.02),
-    rgba(0, 0, 255, 0.06)
-  );
-  background-size: 3px 100%;
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.3);
-  mix-blend-mode: multiply;
-  animation: vhs-noise 0.3s infinite;
-}
-
-@keyframes vhs-noise {
-  0% {
-    background-position: 0 0;
-  }
-  10% {
-    background-position: 1px 0;
-  }
-  20% {
-    background-position: -1px 0;
-  }
-  30% {
-    background-position: 2px 0;
-  }
-  40% {
-    background-position: -2px 0;
-  }
-  50% {
-    background-position: -1px 0;
-  }
-  60% {
-    background-position: 0 0;
-  }
-  70% {
-    background-position: 0 -1px;
-  }
-  80% {
-    background-position: -2px 0;
-  }
-  90% {
-    background-position: 2px 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-@keyframes crt-flicker {
-  0% {
-    opacity: 0.97;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.98;
-  }
 }
 
 .background-image {
@@ -185,6 +86,7 @@ body::after {
 }
 
 .photo-div {
+  position: relative;
   width: 280px;
   height: 210px;
   overflow: hidden;
@@ -196,6 +98,19 @@ body::after {
   transition:
     transform 0.2s,
     box-shadow 0.2s;
+}
+
+/* A faint scanline texture stays within the Wii channel previews. */
+.photo-div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    rgb(10 28 40 / 7%) 3px 4px
+  );
 }
 
 .photo {
@@ -253,29 +168,60 @@ body::after {
 }
 
 .lightbox {
-  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+}
+
+.lightbox::backdrop {
   background-color: rgba(0, 0, 0, 0.9);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  cursor: var(--cursor);
+}
+
+body:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: max(0.75rem, env(safe-area-inset-right));
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 2px solid #00bcd1;
+  border-radius: 50%;
+  background: #fff;
+  color: #39474a;
+  font: 1.75rem / 1 sans-serif;
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
 }
 
 .lightbox-img {
   max-width: 90vw;
-  max-height: 90vh;
+  max-height: 90dvh;
   width: auto;
   height: auto;
   object-fit: contain;
   cursor: var(--cursor);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (orientation: portrait) {
   .photos {
     flex-direction: column;
     flex-wrap: nowrap;
@@ -299,18 +245,18 @@ body::after {
   }
 
   .background-button-link {
-    position: fixed;
-    top: 5px;
-    left: 5px;
-    z-index: 1000;
-    text-decoration: none;
+    position: relative;
+    inset: auto;
+    display: block;
+    width: fit-content;
+    margin: 0.5rem 0 0 0.75rem;
   }
 
   .background-button {
     position: relative;
     bottom: auto;
     left: auto;
-    width: 100px;
+    width: 72px;
     z-index: auto;
     filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.1));
     transition: ease-in-out 0.2s;
@@ -319,13 +265,18 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body {
-    animation: none;
-  }
-  body::after {
-    animation: none;
-  }
   .background-button-link:hover .background-button {
     scale: 1;
+  }
+}
+
+@media (forced-colors: active), (prefers-contrast: more) {
+  body {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .photo-div::after {
+    content: none;
   }
 }

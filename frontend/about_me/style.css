@@ -86,12 +86,23 @@ main {
   object-fit: contain;
 }
 
+.dialogue-box::after {
+  content: "";
+  position: absolute;
+  right: 11%;
+  bottom: 13%;
+  border: 0.5rem solid transparent;
+  border-top-color: #ee9393;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .dialogue-text {
   position: absolute;
   top: 10%;
   left: 10%;
   right: 10%;
-  color: var(--text);
+  color: #ee9393;
   padding: 10px;
   font-size: clamp(1rem, 1.5vw + 0.5rem, 2rem);
   line-height: 1.2;
