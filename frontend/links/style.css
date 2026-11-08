@@ -31,6 +31,7 @@ body {
   height: 100vh;
   z-index: -1;
   overflow: hidden;
+  background: linear-gradient(#9cafd0 40%, #4c5c47 60%);
   perspective: var(--cube-radius);
 }
 
@@ -64,37 +65,36 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   backface-visibility: hidden;
-  outline: 1px solid transparent;
 }
 
 .front {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_0.webp");
+  background-image: url("../assets/links/panoramas/panorama_0.webp");
   transform: translateZ(var(--cube-radius-neg));
 }
 
 .right {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_1.webp");
+  background-image: url("../assets/links/panoramas/panorama_1.webp");
   transform: rotateY(-90deg) translateZ(var(--cube-radius-neg));
 }
 
 .back {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_2.webp");
+  background-image: url("../assets/links/panoramas/panorama_2.webp");
   transform: rotateY(-180deg) translateZ(var(--cube-radius-neg));
 }
 
 .left {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_3.webp");
+  background-image: url("../assets/links/panoramas/panorama_3.webp");
   transform: rotateY(90deg) translateZ(var(--cube-radius-neg));
 }
 
 .top {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_5.webp");
-  transform: rotateX(90deg) translateZ(var(--cube-radius-neg));
+  background-image: url("../assets/links/panoramas/panorama_4.webp");
+  transform: rotateX(-90deg) translateZ(var(--cube-radius-neg)) scaleY(-1);
 }
 
 .bottom {
-  background-image: url("../assets/links/panoramas/EE_1.21.90_panorama_4.webp");
-  transform: rotateX(-90deg) translateZ(var(--cube-radius-neg));
+  background-image: url("../assets/links/panoramas/panorama_5.webp");
+  transform: rotateX(90deg) translateZ(var(--cube-radius-neg)) scaleY(-1);
 }
 
 .panorama-container::after {
