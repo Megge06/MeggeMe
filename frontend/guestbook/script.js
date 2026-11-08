@@ -123,6 +123,12 @@ document
 
 let currentPage = 1;
 let latestEntriesRequest = 0;
+let failedEntriesPage = 1;
+const entriesError = document.querySelector("#entries-error");
+
+entriesError.querySelector("button").addEventListener("click", () => {
+  loadEntries(failedEntriesPage);
+});
 
 async function loadEntries(page) {
   const request = ++latestEntriesRequest;
@@ -132,6 +138,7 @@ async function loadEntries(page) {
     const entries = await response.json();
     if (request !== latestEntriesRequest) return;
 
+    entriesError.hidden = true;
     renderEntries(entries);
     currentPage = page;
     document.querySelector("#page-display").textContent = `Page ${page}`;
@@ -139,6 +146,10 @@ async function loadEntries(page) {
     document.querySelector("#next").disabled =
       response.headers.get("X-Has-More") !== "true";
   } catch (err) {
+    if (request !== latestEntriesRequest) return;
+    failedEntriesPage = page;
+    entriesError.hidden = false;
+    entriesError.querySelector("p").textContent = "Couldn’t load messages.";
     console.error("Failed to load entries:", err);
   }
 }

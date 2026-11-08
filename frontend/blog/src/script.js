@@ -10,7 +10,6 @@ let activePostRequest;
 
 function enableDragging(el) {
   if (!el) return;
-  if (compactLayoutQuery.matches) return;
 
   let dragging = false;
   let startX = 0,
@@ -18,75 +17,55 @@ function enableDragging(el) {
   let currentX = 0,
     currentY = 0;
 
-  function beginDrag(clientX, clientY) {
-    startX = clientX;
-    startY = clientY;
+  let bounds;
+
+  function beginDrag(event) {
+    if (
+      compactLayoutQuery.matches ||
+      !event.isPrimary ||
+      event.button !== 0 ||
+      event.target !== el
+    ) return;
+    const rect = el.getBoundingClientRect();
+    if (el === win && event.clientY - rect.top > 32) return;
+
+    startX = event.clientX - currentX;
+    startY = event.clientY - currentY;
+    bounds = {
+      left: currentX - rect.left,
+      right: currentX + window.innerWidth - rect.right,
+      top: currentY - rect.top,
+      bottom: currentY + window.innerHeight - rect.bottom,
+    };
     dragging = true;
+    el.setPointerCapture(event.pointerId);
+    event.preventDefault();
   }
 
-  function moveDrag(clientX, clientY) {
-    if (!dragging) return;
-    const dx = clientX - startX;
-    const dy = clientY - startY;
+  function moveDrag(event) {
+    if (!dragging || !event.isPrimary) return;
 
-    const newX = currentX + dx;
-    const newY = currentY + dy;
-    el.style.transform = `translate(${newX}px, ${newY}px)`;
+    currentX = Math.max(bounds.left, Math.min(event.clientX - startX, bounds.right));
+    currentY = Math.max(bounds.top, Math.min(event.clientY - startY, bounds.bottom));
+    el.style.transform = `translate(${currentX}px, ${currentY}px)`;
   }
 
-  function endDrag(clientX, clientY) {
-    if (!dragging) return;
-
-    const dx = clientX - startX;
-    const dy = clientY - startY;
-    currentX += dx;
-    currentY += dy;
-
+  el.addEventListener("pointerdown", beginDrag);
+  el.addEventListener("pointermove", moveDrag);
+  el.addEventListener("lostpointercapture", () => {
     dragging = false;
-  }
-
-  el.addEventListener("mousedown", (e) => {
-    if (e.target !== el) return;
-    beginDrag(e.clientX, e.clientY);
-    e.preventDefault();
   });
 
-  window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
-  window.addEventListener("mouseup", (e) => endDrag(e.clientX, e.clientY));
-
-  el.addEventListener(
-    "touchstart",
-    (e) => {
-      const t = e.touches[0];
-      if (e.target !== el) return;
-      beginDrag(t.clientX, t.clientY);
-    },
-    { passive: true },
-  );
-
-  window.addEventListener(
-    "touchmove",
-    (e) => {
-      const t = e.touches[0];
-      moveDrag(t.clientX, t.clientY);
-    },
-    { passive: true },
-  );
-
-  window.addEventListener("touchend", (e) => {
-    const t = e.changedTouches[0];
-    endDrag(t.clientX, t.clientY);
+  window.addEventListener("resize", () => {
+    currentX = 0;
+    currentY = 0;
+    dragging = false;
+    el.style.removeProperty("transform");
   });
 }
 
 enableDragging(win);
 enableDragging(ame);
-
-compactLayoutQuery.addEventListener("change", (event) => {
-  if (!event.matches) return;
-  win.style.removeProperty("transform");
-  ame?.style.removeProperty("transform");
-});
 
 let zIndexCounter = 10;
 

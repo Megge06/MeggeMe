@@ -119,11 +119,16 @@ body {
   padding: 20px 0;
 }
 
-.minecraft-logo {
-  max-width: 800px;
-  width: 90%;
-  height: auto;
+.logo {
+  position: relative;
+  width: min(90vw, 800px);
   margin-bottom: 20px;
+}
+
+.minecraft-logo {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .button-container {
@@ -196,8 +201,7 @@ body {
     padding: 8px 0;
   }
 
-  .minecraft-logo {
-    display: block;
+  .logo {
     width: min(360px, 72vw, 92dvh);
     margin-block: -1.25rem;
   }
@@ -213,5 +217,36 @@ body {
 
   .webring {
     margin-top: 8px;
+  }
+}
+
+.title-splash {
+  position: absolute;
+  top: 61%;
+  left: 82%;
+  margin: 0;
+  translate: -50% -50%;
+  rotate: -20deg;
+  white-space: nowrap;
+  color: #ffff00;
+  font-size: clamp(0.75rem, 2.2vw, 1.5rem);
+  letter-spacing: 0;
+  text-shadow: 2px 2px #3f3f00;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .title-splash {
+    animation: splash-pulse 0.5s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes splash-pulse {
+  from {
+    scale: 0.97;
+  }
+
+  to {
+    scale: 1.09;
   }
 }

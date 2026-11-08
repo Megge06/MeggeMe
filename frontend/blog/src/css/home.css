@@ -58,11 +58,9 @@ p img {
   position: absolute;
   top: clamp(4rem, 9vh, 8rem);
   left: clamp(3rem, 5vw, 7rem);
-  width: auto;
-  max-width: 58vw;
-  height: min(670px, calc(100dvh - 2rem));
-  padding: clamp(40px, 6.25%, 50px);
-  cursor: var(--cursor-move);
+  box-sizing: border-box;
+  width: min(800px, 58vw, (100dvh - clamp(4rem, 9vh, 8rem) - 1rem) * 800 / 670);
+  padding: clamp(1.5rem, 4vw, 3rem);
 
   aspect-ratio: 800 / 670;
   z-index: 10;
@@ -75,6 +73,14 @@ p img {
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
+}
+
+.post-window::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2rem;
+  cursor: var(--cursor-move);
 }
 
 .ame-window {
@@ -147,7 +153,7 @@ p img {
 }
 
 .post-window .post-list a {
-  font-size: 1.25rem;
+  font-size: inherit;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -294,12 +300,10 @@ h2 {
     position: relative;
     left: auto;
     top: auto;
-    width: auto;
-    max-width: 450px;
-    height: min(928px, calc(100dvh - 5.5rem - env(safe-area-inset-top)));
+    width: min(100%, 450px, (100dvh - 5.5rem - env(safe-area-inset-top)) * 800 / 1650);
     margin: calc(4.75rem + env(safe-area-inset-top)) auto 0.5rem;
     padding: clamp(1.25rem, 6vw, 2rem);
-    padding-top: clamp(4rem, 10dvh, 5.5rem);
+    padding-top: clamp(2.5rem, 8dvh, 5.5rem);
     cursor: auto;
     background: url("/blog/assets/images/window_vertical.png") no-repeat
       center / 100% 100%;
@@ -410,15 +414,13 @@ h2 {
   .post-window {
     top: 0.5rem;
     left: max(5rem, env(safe-area-inset-left));
-    right: max(0.5rem, env(safe-area-inset-right));
-    max-width: none;
-    height: calc(100dvh - 1rem);
-    aspect-ratio: auto;
+    width: min(100vw - 5.5rem, (100dvh - 1rem) * 800 / 670);
+    padding-inline: 1rem;
     display: block;
     border: solid transparent;
     border-width: 1.5rem 0.5rem 0.75rem;
     background-origin: border-box;
-    padding: 0.5rem clamp(1rem, 4vw, 2.5rem);
+    padding-block: 0.5rem;
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -673,5 +675,19 @@ h2 {
 
   .comment-form {
     padding: 12px;
+  }
+}
+
+.post-list .post-date a {
+  color: inherit;
+}
+
+.post-list .post-date time {
+  margin-inline-start: 0.5em;
+}
+
+@media (max-width: 760px), (orientation: landscape) and (max-height: 600px) {
+  .post-window::before {
+    display: none;
   }
 }

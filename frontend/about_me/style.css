@@ -86,15 +86,47 @@ main {
   object-fit: contain;
 }
 
-.dialogue-box::after {
-  content: "";
+.dialogue-advance {
   position: absolute;
-  right: 11%;
-  bottom: 13%;
+  right: 9%;
+  bottom: 8%;
+  z-index: 3;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ee9393;
+  cursor: pointer;
+}
+
+.dialogue-advance::after {
+  content: "";
   border: 0.5rem solid transparent;
-  border-top-color: #ee9393;
-  z-index: 2;
-  pointer-events: none;
+  border-top-color: currentColor;
+  opacity: 0;
+  transform: translateY(25%);
+}
+
+.line-ready .dialogue-advance::after,
+.dialogue-advance:focus-visible::after {
+  opacity: 1;
+}
+
+.dialogue-advance:focus-visible {
+  outline: 2px solid currentColor;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .line-ready .dialogue-advance:not(:focus-visible)::after {
+    animation: dialogue-cue 1.4s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes dialogue-cue {
+  to { opacity: 0.4; }
 }
 
 .dialogue-text {

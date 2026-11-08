@@ -16,7 +16,7 @@ title: "Photos"
   />
 </a>
 
-<div class="photos">
+<div class="photos" id="photo-grid">
   {% for photo in photos %}
   <button
     class="photo-div"
@@ -31,6 +31,14 @@ title: "Photos"
   </button>
   {% endfor %}
 </div>
+
+{% if photos.length > 6 %}
+<nav class="photo-pages" aria-label="Photo pages" hidden>
+  <button type="button" aria-label="Previous photo page" aria-controls="photo-grid">◀</button>
+  <span aria-live="polite"></span>
+  <button type="button" aria-label="Next photo page" aria-controls="photo-grid">▶</button>
+</nav>
+{% endif %}
 
 <dialog
   id="lightbox"

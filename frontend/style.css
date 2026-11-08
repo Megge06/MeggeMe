@@ -303,7 +303,15 @@ body.splash-done .bg-splash {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body {
+    background: #0000aa url("assets/home/persona_3_still_landscape.webp") left center / cover no-repeat fixed;
+  }
+  .bg-splash,
+  .bg-loop {
+    display: none;
+  }
   .btn {
+    transition: none;
     animation: none;
   }
   .triangle-indicator {
@@ -312,5 +320,12 @@ body.splash-done .bg-splash {
   }
   .bg-splash {
     transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-aspect-ratio: 1/1) {
+  body {
+    background-image: url("assets/home/persona_3_still_portrait.webp");
+    background-position: left top;
   }
 }

@@ -73,11 +73,12 @@ let currentCleanText = "";
 
 typewriterEffect(text[index]);
 
-function handleDialogueClick() {
+function handleDialogueClick(event) {
   if (isTyping) {
     clearTimeout(typingTimeout);
     dialogueText.textContent = currentCleanText;
     isTyping = false;
+    dialogueBox.classList.add("line-ready");
     return;
   }
 
@@ -85,7 +86,9 @@ function handleDialogueClick() {
     index++;
     typewriterEffect(text[index]);
   } else {
+    if (document.querySelector(".options").childElementCount) return;
     options();
+    if (event.detail === 0) document.querySelector(".option").focus();
   }
 }
 dialogueBox.addEventListener("click", handleDialogueClick);
@@ -102,6 +105,7 @@ function changeImage(text) {
 
 function typewriterEffect(fullText) {
   isTyping = true;
+  dialogueBox.classList.remove("line-ready");
 
   changeImage(fullText);
 
@@ -122,6 +126,7 @@ function typewriterEffect(fullText) {
       typingTimeout = setTimeout(typeNextChar, typingSpeed);
     } else {
       isTyping = false;
+      dialogueBox.classList.add("line-ready");
     }
   }
   typeNextChar();
@@ -179,6 +184,9 @@ function options() {
       optionsContainer.style.display = "none";
       optionsContainer.innerHTML = "";
       typewriterEffect(text[index]);
+      if (document.activeElement === document.body) {
+        document.querySelector(".dialogue-advance").focus();
+      }
     });
 
     option.addEventListener("keydown", (e) => {

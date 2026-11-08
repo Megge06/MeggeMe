@@ -531,3 +531,20 @@ input {
   letter-spacing: 0.08em;
   transform: skewX(-4deg);
 }
+
+.message,
+#guestbook-form textarea {
+  text-transform: none;
+}
+
+.entries-error {
+  margin-block: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--p-black);
+  color: var(--p-white);
+  text-align: center;
+}
+
+.entries-error p {
+  margin-bottom: 0.75rem;
+}

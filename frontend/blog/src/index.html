@@ -33,34 +33,25 @@ title: "Blog"
           src="{{ '/assets/images/icon_cho.png' | url }}"
           alt="Author icon"
         />
-        <p>
-          <span class="p-author h-card" style="display: none">
-            <a class="u-url p-name" href="https://megge.me/"
-              >{{ post.data.author }}</a
-            >
-          </span>
-
-          {{ post.data.author }}
-
+        <h2>
           <a
             class="u-url p-name"
             href="{{ post.url | url }}"
             onclick="loadPost('{{ post.url | url }}', event); return false;"
-          >
-            {{ post.data.title }}
-          </a>
-        </p>
-
-        <p class="post-description p-summary">{{ post.data.description }}</p>
+          >{{ post.data.title }}</a>
+        </h2>
 
         <p class="post-date">
+          <span class="p-author h-card">
+            <a class="u-url p-name" href="https://megge.me/">{{ post.data.author }}</a>
+          </span>
           <time
             class="dt-published"
             datetime="{{ post.data.date | dateToRfc3339 }}"
-          >
-            {{ post.data.date }}
-          </time>
+          >{{ post.data.date }}</time>
         </p>
+
+        <p class="post-description p-summary">{{ post.data.description }}</p>
 
         <p class="interactions">
           <img src="{{ '/assets/images/icon_star.png' | url }}" alt="Star" />

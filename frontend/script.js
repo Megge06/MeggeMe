@@ -1,3 +1,5 @@
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
 function updateVideoSources() {
   const splashVideo = document.querySelector(".bg-splash");
   const loopVideo = document.querySelector(".bg-loop");
@@ -5,6 +7,12 @@ function updateVideoSources() {
 
   const splashSources = splashVideo.querySelectorAll("source");
   const loopSources = loopVideo.querySelectorAll("source");
+
+  if (reducedMotion.matches) {
+    splashVideo.pause();
+    loopVideo.pause();
+    return;
+  }
 
   if (splashSources.length < 2 || loopSources.length < 2) return;
 
@@ -22,6 +30,11 @@ function updateVideoSources() {
 
   splashVideo.load();
   loopVideo.load();
+  if (document.body.classList.contains("splash-done")) {
+    loopVideo.play().catch(() => {});
+  } else {
+    splashVideo.play().catch(() => {});
+  }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -41,6 +54,8 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+reducedMotion.addEventListener("change", updateVideoSources);
 
 window.addEventListener("resize", () => {
   const currentSrc = document.querySelector(".bg-splash source").src;
@@ -94,41 +109,26 @@ function positionTriangle(button) {
     .forEach((b) => b.classList.toggle("is-active", b === button));
 }
 
+const buttons = document.querySelectorAll(".btn");
 const startButton = document.getElementById("startButton");
-const settingsButton = document.getElementById("settingsButton");
-const menuButton = document.getElementById("menuButton");
-const exitButton = document.getElementById("exitButton");
-const guestbookButton = document.getElementById("guestbookButton");
+
+function positionCurrentSelection() {
+  positionTriangle(
+    document.querySelector(".btn:focus-visible") ||
+      document.querySelector(".btn:hover") ||
+      document.querySelector(".btn.is-active") ||
+      startButton,
+  );
+}
 
 window.addEventListener("load", () => {
-  positionTriangle(startButton);
-  if (document.fonts) {
-    document.fonts.ready.then(() =>
-      positionTriangle(document.querySelector(".btn:hover") || startButton),
-    );
-  }
+  positionCurrentSelection();
+  document.fonts?.ready.then(positionCurrentSelection);
 });
 
-startButton.addEventListener("mouseenter", () => {
-  positionTriangle(startButton);
+buttons.forEach((button) => {
+  button.addEventListener("mouseenter", () => positionTriangle(button));
+  button.addEventListener("focus", () => positionTriangle(button));
 });
 
-settingsButton.addEventListener("mouseenter", () => {
-  positionTriangle(settingsButton);
-});
-
-menuButton.addEventListener("mouseenter", () => {
-  positionTriangle(menuButton);
-});
-
-exitButton.addEventListener("mouseenter", () => {
-  positionTriangle(exitButton);
-});
-
-guestbookButton.addEventListener("mouseenter", () => {
-  positionTriangle(guestbookButton);
-});
-
-window.addEventListener("resize", () => {
-  positionTriangle(document.querySelector(".btn:hover") || startButton);
-});
+window.addEventListener("resize", positionCurrentSelection);
