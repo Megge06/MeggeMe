@@ -87,12 +87,13 @@ body {
 
 .photo-div {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  width: 280px;
+  height: 210px;
   overflow: hidden;
   border-radius: 30px;
   border: 3px solid #d0d0d0;
   background-color: white;
+  flex-shrink: 0;
   padding: 0;
   transition:
     transform 0.2s,
@@ -120,38 +121,19 @@ body {
 }
 
 .photos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 2dvh, 1.25rem);
-  width: min(86vw, 56rem, 135dvh);
-  margin-inline: auto;
-  padding-block: clamp(0.5rem, 3dvh, 1.5rem);
-}
-
-.photo-pages:not([hidden]) {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px;
+  max-height: 80vh;
+  align-content: flex-start;
+  height: 100%;
 }
 
-.photo-pages button {
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  border: 2px solid #9ac7d2;
-  border-radius: 1.5rem;
-  background: #fff;
-  color: #356c8a;
-  font: inherit;
-}
-
-.photo-pages button[aria-disabled="true"] {
-  opacity: 0.5;
-}
-
-.photo-div:hover,
-.photo-div:focus-visible,
-.photo-pages button:focus-visible {
+.photo-div:hover {
   box-shadow:
     0 0 0 2px #00bcd1,
     0 0 15px #00bcd1;
@@ -241,15 +223,17 @@ body:has(.lightbox[open]) {
 
 @media (max-width: 768px) and (orientation: portrait) {
   .photos {
-    grid-template-columns: minmax(0, 1fr);
-    width: min(90vw, 400px);
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-items: center;
+    max-height: none;
   }
 
-  @media (min-width: 420px) {
-    .photos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      width: min(90vw, 700px);
-    }
+  .photo-div {
+    width: 90dvw;
+    max-width: 400px;
   }
 
   .menu {
